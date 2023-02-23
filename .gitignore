@@ -1,2 +1,6 @@
-planning-docs
-
+.env
+__pycache__/
+*.py[cod]
+.venv
+.DS_Store
+.vscode/
