@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flask React Project
 
 This is the starter for the Flask React project.
@@ -146,3 +147,9 @@ your site just below the name of the Web Service at the top of the page.
 
 [Render.com]: https://render.com/
 [Dashboard]: https://dashboard.render.com/# testing-testing
+=======
+# BrainLand
+This repo is  a clone of some of the functionality and styling of BrainScape
+
+![image](/planning-docs/BrainLand.png)
+>>>>>>> 6e124c9c0ab8b04630bc602631f7f259a35e3c77
