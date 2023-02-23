@@ -1,6 +1,7 @@
 from app.models import db, Class, environment, SCHEMA
   
 def seed_classes():
+    # From Find Flashcards: Anatomy 
     class1 = Class(name = "Anatomy", user_id = 1)
     class2 = Class(name = "Appendicular Skeleton", user_id = 1)
     class3 = Class(name = "Axial Skeleton", user_id = 1)
@@ -45,28 +46,6 @@ def seed_classes():
     db.session.add(class19)
     db.session.add(class20) 
     db.session.add(class21) 
-       
-    db.session.add(class1)
-    db.session.add(class2)
-    db.session.add(class3)
-    db.session.add(class4)
-    db.session.add(class5)
-    db.session.add(class6)
-    db.session.add(class7)
-    db.session.add(class8)
-    db.session.add(class9)
-    db.session.add(class10)
-    db.session.add(class11)
-    db.session.add(class12)
-    db.session.add(class13)
-    db.session.add(class14)
-    db.session.add(class15)
-    db.session.add(class16)
-    db.session.add(class17)
-    db.session.add(class18)
-    db.session.add(class19)
-    db.session.add(class20)
-    db.session.add(class21)
     
     db.session.commit()
     
