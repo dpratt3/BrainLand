@@ -52,7 +52,6 @@ class CategoryClass(db.Model):
             "class_id": self.class_id,
             "category_id": self.category_id
     }
-
         
 class Deck(db.Model):
     __tablename__ = "deck"
@@ -67,8 +66,7 @@ class Deck(db.Model):
     
     # cards = db.Relationship("Cards", backref = db.backref("deck", lazy = True))
     # progress = db.Relationship("Progress", backref = db.backref("deck", lazy = True))  
-    # created_at placeholder
-    # updated_at placeholder
+
     
     def to_dict(self):
         return {
