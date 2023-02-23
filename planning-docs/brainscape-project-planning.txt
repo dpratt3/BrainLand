@@ -1,0 +1,96 @@
+### Questions 
+- What is Tags/categories? Answer: Tags/Categories are the super category of classes. 
+- Do we need CRUD for classes? Answer: Yes
+- Search is for Decks? Answer: No, search is for tags. Then, tags have classes, and classes have tags.
+
+### Required APIs 
+
+- CRUD for Decks
+- CRUD for user authentication (login, signup)
+- CRUD for progress (Update score)
+
+### Databse Schema
+- Categories: 
+	- id
+	- name
+	- user_id (users can create tags that don't already exist)
+
+- CategoriesClasses 
+	- id
+	- category_id
+	- class_id 
+	- user_id (users can associate tags with classes that they own)
+
+- Classes:
+	- id
+	- name
+	- user_id (classes belong to users)
+	
+- Decks:
+	- id
+	- name
+	- user_id
+	- class_id (decks belong to classes)
+	- created_at
+	- updated_at
+	
+- Cards:
+	- id
+	- deck_id (cards belong to decks)
+	- card_question
+	- card_answer
+
+- Progress:
+	- id
+	- user_id
+	- deck_id
+	- progress_score (incremented or decremented based on user ratings of confidence in questions)
+	
+- User:
+	- id
+	- img_link
+	- first_name
+	- last_name
+	- email
+	- hashed_password
+	
+### Data base schema summary
+- Each Category has a list of classes; Tags to classes is 1 to many; classes to Categories is many-to-1
+- Each Class has a list of Decks; Classes to Decks is 1 to many; Decks to Classes is many-to-1
+- Each Deck has list of cards: Decks to cards is 1 to many; Cards to decks is 1 to 1
+
+### Request Overview
+- Create Deck
+* name: "test"
+* listOfCard: []
+
+- Update Deck
+-id: 1
+* name: "test"
+* listOfCard: [ {question: "A", "answer: "a1"}, {}]
+* list deck
+	- in response:
+		[{id: 1, name: "test", listOfCard:  [ {question: "A", "answer: "a1"}, {}]}]
+		
+### Example tables
+- deck
+id 	name
+1	test
+2	easy
+3	medium
+
+- card
+deck_id		question	answer
+1		Q1		A1
+1		Q2		A2
+1		Q3		A3
+3		QA		AA
+3		QB		AB
+
+
+	
+
+
+
+
+
