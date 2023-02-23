@@ -78,7 +78,7 @@ class Deck(db.Model):
     }
 
 class Card(db.Model):
-    __tablename__ = "cards"
+    __tablename__ = "card"
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(

@@ -3,19 +3,19 @@ from app.models import db, Deck, environment, SCHEMA
 def seed_decks():
         # *** Anatomy Decks ***
         # Anatomy
-        deck1 = Deck(name = "Abdomen Anatomy", class_id = 1) #Abdomen Anatomy
-        deck2 = Deck(name = "Anatomy - Thorax and Abdomen", class_id = 1) #Abdomen Anatomy
+        deck1 = Deck(name = "Abdomen Anatomy", class_id = 1)
+        deck2 = Deck(name = "Anatomy - Thorax and Abdomen", class_id = 1) 
         deck3 = Deck(name = "Anatomy - abdominal aorta", class_id = 1 )
         
         # Appendicular Skeleton
-        deck4 = Deck(name = "Appendicular Skeleton", class_id = 2) #Abdomen Anatomy
-        deck5 = Deck(name = "CVA", class_id = 2) #Abdomen Anatomy
+        deck4 = Deck(name = "Appendicular Skeleton", class_id = 2) 
+        deck5 = Deck(name = "CVA", class_id = 2) 
         deck6 = Deck(name = "Anatomy (Pharm 110)", class_id = 2 )    
         
         # Axial Skeleton
-        deck7 = Deck(name = "Axial Skeleton", class_id = 3) #Abdomen Anatomy
-        deck8 = Deck(name = "Axial Skeleton: Cranial Skull", class_id = 3) #Abdomen Anatomy
-        deck9 = Deck(name = "Radiography of the Axial Skeleton", class_id = 3 )        
+        deck7 = Deck(name = "Axial Skeleton", class_id = 3) 
+        deck8 = Deck(name = "Axial Skeleton: Cranial Skull", class_id = 3) 
+        deck9 = Deck(name = "Anatomical Directions", class_id = 3 )        
         # Back Anatomy    
         # Cardiac Anatomy    
         # Craniofacial    

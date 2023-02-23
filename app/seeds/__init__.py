@@ -4,6 +4,7 @@ from .categories import seed_categories, undo_categories
 from .classes import seed_classes, undo_classes
 from .categories_classes import seed_categories_classes, undo_categories_classes
 from .decks import seed_decks, undo_decks
+from .cards import seed_cards, undo_cards
 
 from app.models.db import db, environment, SCHEMA
 
@@ -26,6 +27,7 @@ def seed():
     seed_classes()
     seed_categories_classes()
     seed_decks()
+    seed_cards()
     # Add other seed functions here
 
 
@@ -37,4 +39,5 @@ def undo():
     undo_classes()
     undo_categories_classes()
     undo_decks()
+    undo_cards()
     # Add other undo functions here
