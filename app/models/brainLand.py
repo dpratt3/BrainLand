@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .db import add_prefix_for_prod
 
-class Classes(db.Model):
+class Class(db.Model):
     __tablename__ = "class"
     
     if environment == "production":
@@ -9,7 +9,7 @@ class Classes(db.Model):
             'question_id', 'tag_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullalble = False)
+    name = db.Column(db.String(255), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     
     def to_dict(self):
@@ -19,7 +19,7 @@ class Classes(db.Model):
             "user_id": self.user_id
     }
 
-class Categories(db.Model):
+class Category(db.Model):
     __tablename__ = "category"
     
     if environment == "production":
@@ -27,7 +27,7 @@ class Categories(db.Model):
             'question_id', 'tag_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullalble = False)
+    name = db.Column(db.String(255), nullable = False)
     
     def to_dict(self):
         return {
@@ -35,7 +35,7 @@ class Categories(db.Model):
             "name": self.name
     }
 
-class CategoriesClasses(db.Model):
+class CategoryClass(db.Model):
     __tablename__ = "category_class"
     
     if environment == "production":
@@ -54,7 +54,7 @@ class CategoriesClasses(db.Model):
     }
 
         
-class Decks(db.Model):
+class Deck(db.Model):
     __tablename__ = "deck"
     
     if environment == "production":
@@ -62,11 +62,11 @@ class Decks(db.Model):
             'question_id', 'tag_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullalble = False)
+    name = db.Column(db.String(255), nullable = False)
     class_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('class.id')), nullable=False)
     
-    cards = db.Relationship("Cards", backref = "Deck", lazy = True)
-    progress = db.Relationship("Progress", backref = "Deck", lazy = True)  
+    # cards = db.Relationship("Cards", backref = db.backref("deck", lazy = True))
+    # progress = db.Relationship("Progress", backref = db.backref("deck", lazy = True))  
     # created_at placeholder
     # updated_at placeholder
     
@@ -79,7 +79,7 @@ class Decks(db.Model):
             "progress": self.progress
     }
 
-class Cards(db.Model):
+class Card(db.Model):
     __tablename__ = "cards"
     
     if environment == "production":
@@ -100,7 +100,7 @@ class Cards(db.Model):
     }
 
 
-class Progressions(db.Model):
+class Progression(db.Model):
     __tablename__ = "progress"
     
     if environment == "production":

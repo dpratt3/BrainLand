@@ -4,7 +4,7 @@
 # followed by ./db-helper.sh
 
 rm -r migrations
-rm app/dev.db
+rm instance/dev.db
 
 flask db init
 flask db migrate
