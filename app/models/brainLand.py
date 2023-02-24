@@ -1,16 +1,18 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .db import add_prefix_for_prod
 
 class Class(db.Model):
     __tablename__ = "class"
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'name', 'user_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    
+    decks = db.relationship("Deck", backref = db.backref("Class", lazy = True))
+    categories = db.relationship("Category", secondary='category_class', backref = db.backref("Class", lazy = True))
     
     def to_dict(self):
         return {
@@ -24,10 +26,13 @@ class Category(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'name'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
+    
+    
+    classes = db.relationship("Class", secondary='category_class', backref = db.backref("Category", lazy = True))
     
     def to_dict(self):
         return {
@@ -40,7 +45,7 @@ class CategoryClass(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'class_id', 'category_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('class.id')), nullable=False)
@@ -58,14 +63,14 @@ class Deck(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'name', 'class_id'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
     class_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('class.id')), nullable=False)
     
-    # cards = db.Relationship("Cards", backref = db.backref("deck", lazy = True))
-    # progress = db.Relationship("Progress", backref = db.backref("deck", lazy = True))  
+    cards = db.relationship("Card", backref = db.backref("Deck", lazy = True))
+    progress = db.relationship("Progress", backref = db.backref("Deck", lazy = True))  
 
     
     def to_dict(self):
@@ -82,7 +87,7 @@ class Card(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'deck_id', 'card_question', 'card_answer'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     deck_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('deck.id')), nullable=False)
@@ -98,12 +103,12 @@ class Card(db.Model):
     }
 
 
-class Progression(db.Model):
+class Progress(db.Model):
     __tablename__ = "progress"
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+            'name', 'user_id', 'deck_id', 'progress_score'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
