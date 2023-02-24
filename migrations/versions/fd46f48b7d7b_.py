@@ -1,16 +1,19 @@
 """empty message
 
-Revision ID: 0bf90f34944a
+Revision ID: fd46f48b7d7b
 Revises: 
-Create Date: 2023-02-23 16:43:46.509815
+Create Date: 2023-02-23 17:06:56.436327
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '0bf90f34944a'
+revision = 'fd46f48b7d7b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -71,6 +74,22 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE vategory SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE < SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE class SET SCHEMA {SCHEMA};")    
+    if environment == "production":
+        op.execute(f"ALTER TABLE category_card SET SCHEMA {SCHEMA};")    
+    if environment == "production":
+        op.execute(f"ALTER TABLE deck SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE card SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE progress SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
