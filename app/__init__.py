@@ -11,6 +11,7 @@ from .api.card_routes import card_routes
 from .api.category_routes import category_routes
 from .api.class_routes import class_routes
 from .api.deck_routes import deck_routes
+from .api.progress_routes import progress_routes
 
 from .seeds import seed_commands
 from .config import Config
@@ -37,6 +38,7 @@ app.register_blueprint(card_routes, url_prefix='/api/card')
 app.register_blueprint(category_routes, url_prefix='/api/category')
 app.register_blueprint(class_routes, url_prefix='/api/class')
 app.register_blueprint(deck_routes, url_prefix='/api/deck')
+app.register_blueprint(progress_routes, url_prefix='/api/progress')
 
 db.init_app(app)
 Migrate(app, db)
