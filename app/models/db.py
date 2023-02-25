@@ -1,10 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-# from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
-
 
 db = SQLAlchemy()
 
