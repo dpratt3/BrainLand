@@ -8,6 +8,5 @@ category_routes = Blueprint('category', __name__)
 def get_all_categories():
     if current_user.is_authenticated:
         categories = Category.query.all()
-    #print((cards[0].to_dict()))
     all_categories = [category.to_dict() for category in categories]
-    return {"Cards": all_categories}
+    return {"Categories": all_categories}
