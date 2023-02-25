@@ -12,4 +12,7 @@ def get_all_progress(id):
         progress = Progress.query.filter(Progress.user_id == id).all()
         all_progress_by_user = [prog.to_dict() for prog in progress]
         
+        if not progress:
+            return {"Error": "No progress available for designated user", "statusCode": 404}, 404
+            
     return {"Progress": all_progress_by_user}
