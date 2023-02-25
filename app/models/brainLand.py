@@ -5,8 +5,7 @@ class Class(db.Model):
     __tablename__ = "class"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
@@ -23,8 +22,7 @@ class Category(db.Model):
     __tablename__ = "category"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
@@ -39,8 +37,7 @@ class CategoryClass(db.Model):
     __tablename__ = "category_class"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('class.id')), nullable=False)
@@ -57,8 +54,7 @@ class Deck(db.Model):
     __tablename__ = "deck"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable = False)
@@ -81,8 +77,7 @@ class Card(db.Model):
     __tablename__ = "card"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     deck_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('deck.id')), nullable=False)
@@ -102,8 +97,7 @@ class Progression(db.Model):
     __tablename__ = "progress"
     
     if environment == "production":
-        __table_args__ = (db.UniqueConstraint(
-            'question_id', 'tag_id'), {'schema': SCHEMA})
+        __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
