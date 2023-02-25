@@ -74,23 +74,23 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
+
+    if environment == "progress":
         op.execute(f"ALTER TABLE vategory SET SCHEMA {SCHEMA};")
-    if environment == "production":
+    if environment == "card":
         op.execute(f"ALTER TABLE < SET SCHEMA {SCHEMA};")
-    if environment == "production":
+    if environment == "deck":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    if environment == "production":
+    if environment == "category_class":
         op.execute(f"ALTER TABLE class SET SCHEMA {SCHEMA};")    
-    if environment == "production":
+    if environment == "class":
         op.execute(f"ALTER TABLE category_card SET SCHEMA {SCHEMA};")    
-    if environment == "production":
+    if environment == "users":
         op.execute(f"ALTER TABLE deck SET SCHEMA {SCHEMA};")
-    if environment == "production":
+    if environment == "category":
         op.execute(f"ALTER TABLE card SET SCHEMA {SCHEMA};")
-    if environment == "production":
-        op.execute(f"ALTER TABLE progress SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###
+
+    ### end Alembic commands ###
 
 
 def downgrade():
