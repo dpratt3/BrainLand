@@ -38,14 +38,32 @@ def create_classes():
     
     return {"New Class": result }
 
-### delete a class
-# @class_routes.route('/<int:id>', methods = ["DELETE"])
-# def delete_class_by_id(id):
-#     if current_user.is_authenticated:
-#         class_obj = Class.query.get(id)
-#         category_classes = CategoryClass.query.filter(CategoryClass.class_id == 1).all()
-#         db.session.delete(class_obj)
-#         db.session.delete(category_classes[0])
-#         db.session.commit()
-#         print("GoOOD")
-#     return 'Hello world!'
+## delete a class
+@class_routes.route('/<int:id>', methods = ["DELETE"])
+def delete_class_by_id(id):
+    if current_user.is_authenticated:
+        class_obj = Class.query.get(id)
+        
+        if not class_obj: 
+            return "Class not found", 401 # 401 is unathorized
+
+        if class_obj.user_id != current_user.id:
+            return "User does not own class", 404
+        
+        # Delete the category class association when the class is deleted    
+        try:
+            category_classes = CategoryClass.query.filter(CategoryClass.class_id == id).all()
+            print(category_classes)
+            cat_class = category_classes[0]
+            db.session.delete(cat_class)
+            db.session.commit()
+        except:
+            pass # continue if there's not category-class relationship
+        
+        try: 
+            db.session.delete(class_obj)
+            db.session.commit()
+        except:
+            return "Class cannot be deleted"
+        
+    return "Class successfully deleted"
