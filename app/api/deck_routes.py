@@ -12,7 +12,7 @@ def get_all_decks():
     
     all_decks = [ deck.to_dict()['name'] for deck in decks ] # class is a reserved keyword
     
-    return {"All Decks": all_decks}
+    return all_decks
 
 ### create a deck for a class that they made
 @deck_routes.route('/', methods = ["POST"])
@@ -41,7 +41,7 @@ def create_decks():
             "class_id": new_deck.class_id
         }
     
-    return {"New Deck": result }
+    return result
 
 ### Delete a deck from a class that they own
 @deck_routes.route('/<int:id>', methods = ["DELETE"])

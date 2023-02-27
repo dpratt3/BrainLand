@@ -36,7 +36,7 @@ def create_classes():
             "user_id": new_class.user_id
         }
     
-    return {"New Class": result }
+    return result
 
 ## delete a class
 @class_routes.route('/<int:id>', methods = ["DELETE"])

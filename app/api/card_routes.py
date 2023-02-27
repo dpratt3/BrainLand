@@ -10,4 +10,4 @@ def get_all_cards():
         cards = Card.query.all()
     #print((cards[0].to_dict()))
     all_cards = [card.to_dict() for card in cards]
-    return {"Cards": all_cards}
+    return all_cards
