@@ -8,6 +8,8 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import DashboardPage from "./components/DashboardPage";
 import CategoryPage from "./components/CategoryPage";
+import DeckPage from "./components/DeckPage";
+import CardPage from "./components/CardPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,12 @@ function App() {
           </Route>
           <Route path="/category">
             <CategoryPage />
+          </Route>
+          <Route path="/card">
+            <CardPage />
+          </Route>
+          <Route path="/deck">
+            <DeckPage />
           </Route>
           <Route path="/dashboard">
             <DashboardPage />

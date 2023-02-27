@@ -3,20 +3,18 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-
-function DashboardPage() {
+function StudyDeckPage() {
   const dispatch = useDispatch();
-  
+  // retrieve class_id from url because you are routed here after clicking on class name
+
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
 
   return (
     <>
-      <h1>Dashboard</h1>
-      - To do: Create class button (On click it will open create-class modal)
-      - To do: list of classes (On click it will redirect to deck page for that class)
+     To do: show questions one by one, track progress, and store progress for a particular user.
     </>
   );
 }
 
-export default DashboardPage;
+export default StudyDeckPage;
