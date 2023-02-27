@@ -108,7 +108,7 @@ class Progress(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'name', 'user_id', 'deck_id', 'progress_score'), {'schema': SCHEMA})
+            'user_id', 'deck_id', 'progress_score'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
@@ -118,7 +118,6 @@ class Progress(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "name": self.name,
             "user_id": self.user_id,
             "deck_id": self.deck_id,
             "progress_score": self.progress_score
