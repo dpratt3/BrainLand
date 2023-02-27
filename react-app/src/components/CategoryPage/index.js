@@ -10,9 +10,10 @@ function CategoryPage() {
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
 
+//   categories are like subjects
   return (
     <>
-      <h1>Categories</h1>
+      <h1>Categories</h1>  
     </>
   );
 }
