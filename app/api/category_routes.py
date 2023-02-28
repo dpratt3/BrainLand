@@ -10,7 +10,7 @@ def get_all_categories():
     if current_user.is_authenticated:
         categories = Category.query.all()
     all_categories = [category.to_dict() for category in categories]
-    return {"Categories": all_categories}
+    return all_categories
 
 ### Delete a category by id
 # @category_routes.route('/<int:id>', methods = ["DELETE"])

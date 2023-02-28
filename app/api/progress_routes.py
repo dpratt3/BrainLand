@@ -15,4 +15,4 @@ def get_all_progress(id):
         if not progress:
             return {"Error": "No progress available for designated user", "statusCode": 404}, 404
             
-    return {"Progress": all_progress_by_user}
+    return all_progress_by_user
