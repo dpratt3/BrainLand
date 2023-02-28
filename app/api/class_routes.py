@@ -13,7 +13,7 @@ def get_all_classes():
     
     all_classes = [ class_var.to_dict() for class_var in classes ] # class is a reserved keyword
     
-    return {"All Classes": all_classes}
+    return all_classes
 
 ### create a class
 @class_routes.route('/', methods = ["POST"])

@@ -78,8 +78,8 @@ class Deck(db.Model):
             "id": self.id,
             "name": self.name,
             "class_id": self.class_id,
-            "cards": self.cards,
-            "progress": self.progress
+            # "cards": self.cards,
+            # "progress": self.progress
     }
 
 class Card(db.Model):

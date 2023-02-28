@@ -8,8 +8,14 @@ card_routes = Blueprint('card', __name__)
 def get_all_cards():
     if current_user.is_authenticated:
         cards = Card.query.all()
-
+    
+    deck_id = request.args.get('deck_id')
     all_cards = [card.to_dict() for card in cards]
+    
+    if deck_id != None:
+        all_cards = [card for card in all_cards if card['deck_id'] == int(deck_id)]   
+        
+    
     return all_cards
 
 # post a card to a deck that they own

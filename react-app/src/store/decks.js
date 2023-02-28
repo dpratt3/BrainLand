@@ -1,6 +1,6 @@
 // constants
 const SET_DECK = "deck/SET_DECk";
-const CREATE_DECK  = "deck/CREATE_DECK";
+const CREATE_DECK = "deck/CREATE_DECK";
 
 const setDecks = (decks) => ({
   type: SET_DECK,
@@ -24,6 +24,26 @@ export const listDeck = () => async (dispatch) => {
     dispatch(setDecks(data));
   }
 };
+
+
+export const listDeckByClassId = (class_id) => async (dispatch) => {
+  
+  const response = await fetch(`/api/deck/?class_id=${class_id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(setDecks(data));
+  }
+};
+
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

@@ -10,6 +10,7 @@ import DashboardPage from "./components/DashboardPage";
 import CategoryPage from "./components/CategoryPage";
 import DeckPage from "./components/DeckPage";
 import CardPage from "./components/CardPage";
+import ClassPage from "./components/ClassPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -32,11 +33,15 @@ function App() {
           <Route path="/category">
             <CategoryPage />
           </Route>
-          <Route path="/card">
-            <CardPage />
+         
+          <Route exact path="/class">
+            <ClassPage />
           </Route>
-          <Route path="/deck">
+          <Route path="/class/:classId">
             <DeckPage />
+          </Route>
+          <Route path="/deck/:deckId">
+            <CardPage />
           </Route>
           <Route path="/dashboard">
             <DashboardPage />

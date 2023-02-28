@@ -7,10 +7,16 @@ deck_routes = Blueprint('deck', __name__)
 @deck_routes.route('/', methods = ["GET"])
 def get_all_decks():
     if current_user.is_authenticated:
-    
+        class_id = request.args.get('class_id')
         decks = Deck.query.all()
+        
+        all_decks = [ deck.to_dict() for deck in decks ] # class is a reserved keyword
+        
+        if class_id != None:
+            all_decks = [deck for deck in all_decks if deck['class_id'] == int(class_id)]
+        
     
-    all_decks = [ deck.to_dict()['name'] for deck in decks ] # class is a reserved keyword
+    
     
     return all_decks
 
