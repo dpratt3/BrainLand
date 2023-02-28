@@ -1,19 +1,19 @@
-from app.models import db, Progression, environment, SCHEMA
+from app.models import db, Progress, environment, SCHEMA
 
 # Progress score will be initialized to zero and scaled proporationally to number of cards remaining
 
 def seed_progressions():
         # initialize all progress to zero and then increment as a function of position in deck
         
-        prog1 = Progression(user_id = 1, deck_id = 1, progress_score = 0)
-        prog2 = Progression(user_id = 1, deck_id = 2, progress_score = 0)
-        prog3 = Progression(user_id = 1, deck_id = 3, progress_score = 0)
-        prog4 = Progression(user_id = 2, deck_id = 4, progress_score = 0)
-        prog5 = Progression(user_id = 2, deck_id = 5, progress_score = 0)
-        prog6 = Progression(user_id = 2, deck_id = 6, progress_score = 0)
-        prog7 = Progression(user_id = 3, deck_id = 7, progress_score = 0)
-        prog8 = Progression(user_id = 3, deck_id = 8, progress_score = 0)
-        prog9 = Progression(user_id = 3, deck_id = 9, progress_score = 0)
+        prog1 = Progress(user_id = 1, deck_id = 1, progress_score = 0)
+        prog2 = Progress(user_id = 1, deck_id = 2, progress_score = 0)
+        prog3 = Progress(user_id = 1, deck_id = 3, progress_score = 0)
+        prog4 = Progress(user_id = 2, deck_id = 4, progress_score = 0)
+        prog5 = Progress(user_id = 2, deck_id = 5, progress_score = 0)
+        prog6 = Progress(user_id = 2, deck_id = 6, progress_score = 0)
+        prog7 = Progress(user_id = 3, deck_id = 7, progress_score = 0)
+        prog8 = Progress(user_id = 3, deck_id = 8, progress_score = 0)
+        prog9 = Progress(user_id = 3, deck_id = 9, progress_score = 0)
         
         db.session.add(prog1)
         db.session.add(prog2)
