@@ -5,12 +5,6 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import HomePage from "./components/HomePage";
-import DashboardPage from "./components/DashboardPage";
-import CategoryPage from "./components/CategoryPage";
-import DeckPage from "./components/DeckPage";
-import CardPage from "./components/CardPage";
-import ClassPage from "./components/ClassPage"
 
 function App() {
   const dispatch = useDispatch();
@@ -29,25 +23,6 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route path="/category">
-            <CategoryPage />
-          </Route>
-         
-          <Route exact path="/class">
-            <ClassPage />
-          </Route>
-          <Route path="/class/:classId">
-            <DeckPage />
-          </Route>
-          <Route path="/deck/:deckId">
-            <CardPage />
-          </Route>
-          <Route path="/dashboard">
-            <DashboardPage />
-          </Route>
-          <Route path="/">
-            <HomePage />
           </Route>
         </Switch>
       )}

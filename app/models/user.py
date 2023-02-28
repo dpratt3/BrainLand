@@ -13,9 +13,6 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    
-    classes = db.relationship("Class", backref = db.backref("User", lazy = True))
-    progress = db.relationship("Progress", backref = db.backref("User", lazy = True))
 
     @property
     def password(self):
