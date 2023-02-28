@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { login } from "../../store/session";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { listDeck } from "../../store/decks";
+import { listDeckByClassId } from "../../store/decks";
 
 function DeckPage() {
   const dispatch = useDispatch();
-  const {id} = useParams() // retrieve class_id from url since one is routed here after clicking on class name
+  const {classId} = useParams() // retrieve class_id from url since one is routed here after clicking on class name
   const DeckList = useSelector((state) => state.decks.deck);
-  
+ 
   useEffect(() => {
-    dispatch(listDeck());
+    dispatch(listDeckByClassId(classId));
   }, []);
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -26,8 +26,8 @@ function DeckPage() {
       
       <ul>
         {DeckList?.map((deck) => (
-          <li key={deck}>
-            <a href={deck}>{deck}</a>
+          <li key={deck?.id}>
+            <a href={`/deck/${deck?.id}`}>{deck?.name}</a>
           </li>
         ))}
       </ul>

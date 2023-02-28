@@ -4,12 +4,14 @@ import session from './session'
 import categories from './categories';
 import decks from './decks'
 import cards from './cards'
+import classes from './classes';
 
 const rootReducer = combineReducers({
   session,
   categories,
   decks,
-  cards
+  cards,
+  classes
 });
 
 
