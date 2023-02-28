@@ -38,8 +38,6 @@ def edit_deck_name(id):
         if data['class_id'] not in owned_class_ids:
             return "User cannot assign deck to class that they don't own"
         
-        print(owned_class_ids, "<--------------------------------")
-        
         # change name of deck and class id
         deck_obj.name = data['name']
         deck_obj.class_id = data['class_id']
