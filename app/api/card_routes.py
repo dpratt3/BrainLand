@@ -46,4 +46,39 @@ def post_new_card():
     
     return result
         
+### Delete a card by id (for a deck that they own)
+# post a card to a deck that they own
+@card_routes.route('/<int:card_id>', methods = ["DELETE"])
+def delete_card(card_id):
+    if current_user.is_authenticated:
+         
+        # Note: user must own the class that owns the deck that owns the card-to-be-deleted
         
+        # from card id, get deck id
+        card = Card.query.filter(Card.id == card_id).all()
+        if not card:
+            return 'Card does not exist', 404
+        
+        card_obj = card[0]
+        
+        deck_id = card_obj.deck_id
+         
+        deck_obj = Deck.query.get(deck_id)
+        if not deck_obj:
+            return "Deck does not exist (yet)", 404
+        
+        # User must own the class that owns the deck
+        class_id = deck_obj.class_id
+        class_obj = Class.query.get(class_id)
+         
+        if class_obj.user_id != current_user.id:
+            return "User does not own class that owns deck that owns card", 401
+        
+        try: 
+            db.session.delete(card_obj)
+            db.session.commit()
+        except:
+            return "Card cannot be deleted"
+        
+    return 'Card successfully deleted'  
+         
