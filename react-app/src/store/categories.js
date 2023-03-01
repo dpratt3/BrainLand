@@ -7,6 +7,12 @@ const setCategories = (categories) => ({
   payload: categories,
 });
 
+const createCategories = (categories) => ({
+  type: SET_CATEGORY,
+  payload: categories,
+});
+
+
 const initialState = { category: null };
 
 export const listCategory = () => async (dispatch) => {
@@ -25,10 +31,35 @@ export const listCategory = () => async (dispatch) => {
   }
 };
 
+export const createCategory = (categories) => async(dispatch) => {
+  const response = await fetch("/api/categories/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(categories)
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    dispatch(createCategories(data));
+  }
+};
+
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_CATEGORY:
+    case CREATE_CATEGORY:{
+      const newState = {...state}
+      newState[action.categories.id] = action.categories
+      return newState;
+    }
+    case SET_CATEGORY: {
       return { category: action.payload };
+    }
     default:
       return state;
   }

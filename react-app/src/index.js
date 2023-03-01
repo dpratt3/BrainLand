@@ -26,7 +26,7 @@ function Root() {
 			<Provider store={store}>
 				<BrowserRouter>
 					<App />
-					<Modal />
+					{/* <Modal /> */}
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>

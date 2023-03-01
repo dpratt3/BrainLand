@@ -17,7 +17,7 @@ function ClassPage() {
 
   return (
     <>
-      <h1>Clases</h1>
+      <h1>Classes</h1>
       {/* - To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
       - To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
 
@@ -29,9 +29,7 @@ function ClassPage() {
         ))}
       </ul>
 
-      <button>Create Card</button>
-      <button>Next Card</button>
-      <button>Previous Card</button>
+      <button>Create Class</button>
     </>
   );
 }
