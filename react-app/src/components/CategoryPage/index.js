@@ -5,11 +5,12 @@ import { Redirect } from "react-router-dom";
 import { listCategory } from "../../store/categories";
 import { Modal } from "../../context/Modal";
 
+
 function CategoryPage() {
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.category);
   const [openModal, setOpenModal] = useState(false);
-
+  
   useEffect(() => {
     dispatch(listCategory());
   }, []);
@@ -44,7 +45,7 @@ function CategoryPage() {
           Create Category
         </button>
 
-        {/* do css, alignment color etc */}
+        {/* do css, alignment, color etc. */}
         {/* make it functional */}
       </div>
 
