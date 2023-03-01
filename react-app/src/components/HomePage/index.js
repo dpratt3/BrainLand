@@ -11,10 +11,15 @@ function HomePage() {
   if (!sessionUser) return <Redirect to="/login" />;
 
   return (
-    <>
-      <h1>Home</h1>
-    </>
-  );
+      <div><div style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
+          <img src="https://miro.medium.com/v2/resize:fit:828/0*Bx8KWmQYWfJN0_w5"
+              style={{ width: 800, height: 450, borderRadius: 4 }} alt="crowd of listeners" />
+      </div>
+          <div style={{ textAlign: "center",backgroundColor: "#36013F", marginTop: 8, color: "#fff" }}>
+              BrainScape Clone | Author : David Pratt
+          </div>
+      </div>);
+
 }
 
 export default HomePage;

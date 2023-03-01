@@ -34,7 +34,7 @@ function CategoryPage() {
           style={{
             width: 240,
             height: 34,
-            backgroundColor: "#3faee0",
+            backgroundColor: "#36013F",
             color: "white",
             border: "none",
             fontWeight: 800,
@@ -73,7 +73,7 @@ function CategoryPage() {
               width: 240,
               marginTop: 40,
               height: 34,
-              backgroundColor: "#3faee0",
+              backgroundColor: "#36013F",
               color: "white",
               border: "none",
               fontWeight: 800,
