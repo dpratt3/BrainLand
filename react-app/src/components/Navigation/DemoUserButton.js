@@ -8,10 +8,10 @@ function DemoUserButton() {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
 
-  const demoUser = {credential: 'Demo-lition', password: 'password'} // must be object
+  // const demoUser = {email: 'demo@aa.io', password: 'password'} // must be object
 
   const demoUserLogin = (e) => {
-    return dispatch(sessionActions.login(demoUser)).catch(
+    return dispatch(sessionActions.login('demo@aa.io', 'password')).catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) {

@@ -22,9 +22,9 @@ function Navigation({ isLoaded }){
         <p>BrainLand</p>
         </div>
         <NavLink activeClassName="active-nav" className="nav-link" exact to="/">Home </NavLink>
-        <NavLink activeClassName="active-nav" className="nav-link" to="/classes">Dashboard </NavLink>
-        <NavLink activeClassName="active-nav" className="nav-link" to="/categories">Categories </NavLink>
-        <NavLink activeClassName="active-nav" className="nav-link" to="/decks">Cards </NavLink>
+        <NavLink activeClassName="active-nav" className="nav-link" to="/class">Classes</NavLink>
+        <NavLink activeClassName="active-nav" className="nav-link" to="/category">Categories </NavLink>
+        <NavLink activeClassName="active-nav" className="nav-link" to="/deck">Cards </NavLink>
         <div style={{position: "relative"}}>
         <ProfileButton style={{ position: "absolute", backgroundColor: "#333", color: "#fff", textDecoration: "none", display: "block"}} user={sessionUser} />
         </div>
@@ -40,7 +40,7 @@ function Navigation({ isLoaded }){
         <NavLink activeClassName="active-nav" className="nav-link" exact to="/">Home </NavLink>
         <NavLink activeClassName="active-nav" className="nav-link" to="/login">Log In </NavLink>
         <NavLink activeClassName="active-nav" className="nav-link" to="/signup">Sign Up </NavLink>
-        <NavLink activeClassName="active-nav" className="nav-link" to="/songs">Categories </NavLink>
+        <NavLink activeClassName="active-nav" className="nav-link" to="/category">Categories </NavLink>
         <DemoUserButton />
         </div>
     );
