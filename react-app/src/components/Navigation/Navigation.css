@@ -5,3 +5,13 @@
 .hidden {
   display: none;
 }
+
+.nav-link {
+  color: #fff; 
+  text-decoration: none;
+}
+
+.active-nav {
+  font-weight: 900;
+  font-size: 18px;
+}
