@@ -66,7 +66,7 @@ function ClassPage() {
             flexDirection: "column",
           }}
         >
-          <h2>Create Class</h2>
+          <h2 className="title">Create Class</h2>
           <input
             type="text"
             placeholder="Enter class name"
