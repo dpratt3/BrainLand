@@ -31,6 +31,7 @@ function CategoryPage() {
   //   categories are like subjects
   return (
     <>
+       <h1 className="title">Categories</h1>
       <div
         style={{
           display: "flex",
@@ -38,7 +39,6 @@ function CategoryPage() {
           paddingRight: 40,
         }}
       >
-        <h1>Categories</h1>
         <button
           name="create-category"
           style={{
@@ -72,10 +72,10 @@ function CategoryPage() {
             flexDirection: "column",
           }}
         >
-          <h2>Create Category</h2>
+          <h2 className="title">Create Category</h2>
           <input
             type="text"
-            placeholder="Enter caterory name"
+            placeholder="Enter category name"
             style={{ height: 32, minWidth: 250, borderRadius: 8 , marginTop: 20}}
             onChange={(e) => setCategoryName(e.target.value)}
           />
@@ -102,7 +102,7 @@ function CategoryPage() {
       <ul>
         {categoryList?.map((category) => (
           <li key={category.id}>
-            <a href={category?.name}>{category.name}</a>
+            <a className="link" href={category?.name}>{category.name}</a>
           </li>
         ))}
       </ul>

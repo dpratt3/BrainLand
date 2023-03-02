@@ -28,7 +28,7 @@ function ClassPage() {
 
   return (
     <>
-      <h1>Classes</h1>
+      <h1 className="title">Classes</h1>
       {/* - To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
       - To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
       <div
@@ -99,7 +99,7 @@ function ClassPage() {
       <ul>
         {ClassList?.map((cl) => (
           <li key={cl.id}>
-            <a href={`/class/${cl?.id}`}>{cl?.name}</a>
+            <a className="link" href={`/class/${cl?.id}`}>{cl?.name}</a>
           </li>
         ))}
       </ul>

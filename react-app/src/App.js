@@ -32,8 +32,7 @@ function App() {
           </Route>
           <Route path="/category">
             <CategoryPage />
-          </Route>
-         
+          </Route>         
           <Route exact path="/class">
             <ClassPage />
           </Route>

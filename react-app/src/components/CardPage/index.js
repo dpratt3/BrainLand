@@ -20,19 +20,20 @@ function CardPage() {
 
   return (
     <>
-      <h1>Cards</h1>- To Do: Create decks button (On click it will open create
+      <h1 className="title">Cards</h1>
+      <button>Create Card</button>
+      {/* - To Do: Create decks button (On click it will open create
       deck modal (ambitions) or form (conservative) - To Do: List of decks for
       selected class ( on right side there will be two buttons, 1. Add Cards, 2.
-      Study deck)
+      Study deck) */}
       <ul>
         {CardList?.map((card) => (
           <li key={card?.id}>
-            <p>{card?.card_question}</p>
-            <p>{card?.card_answer}</p>
+            <p style={{color: '#f8f4f4'}}>{card?.card_question}</p>
+            <p style={{color: '#f8f4f4'}}>{card?.card_answer}</p>
           </li>
         ))}
       </ul>
-      <button>Create Card</button>
       <button>Next Card</button>
       <button>Previous Card</button>
     </>

@@ -24,3 +24,7 @@ img[type="link"]:hover {
     border: 2px solid grey;
 }
 
+.link { color: #f8f4f4} /* CSS link color (red) */
+.link:hover { color: #065e06; } /* CSS link hover (green) */
+
+.title {color: #f8f4f4}

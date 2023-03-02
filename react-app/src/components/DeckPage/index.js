@@ -18,16 +18,16 @@ function DeckPage() {
 
   return (
     <>
-      <h1>Decks</h1>
-      * To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
-      * To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck)
+      <h1 className="title">Decks</h1>
+      {/* * To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
+      * To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
 
       <button>Create Deck</button>
       
       <ul>
         {DeckList?.map((deck) => (
           <li key={deck?.id}>
-            <a href={`/deck/${deck?.id}`}>{deck?.name}</a>
+            <a className="link" href={`/deck/${deck?.id}`}>{deck?.name}</a>
           </li>
         ))}
       </ul>
