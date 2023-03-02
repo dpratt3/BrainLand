@@ -43,13 +43,13 @@ export const listClass = () => async (dispatch) => {
   }
 };
 
-export const createClass = (classes) => async(dispatch) => {
+export const createClass = (className, callBack) => async(dispatch) => {
   const response = await fetch("/api/class/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(classes)
+    body: JSON.stringify({className: className})
   });
 
   if (response.ok) {
@@ -57,7 +57,8 @@ export const createClass = (classes) => async(dispatch) => {
     if (data.errors) {
       return;
     }
-    dispatch(createClasses(data));
+    dispatch(createClasses({classes: data}));
+    callBack();
   }
 };
 
@@ -96,9 +97,9 @@ export const deleteClass = (classes, classId) => async(dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_CLASS:{
-      const newState = {...state}
-      newState[action.classes.id] = action.classes
-      return newState;
+      let classes = state.class;
+      classes.push(action.payload.classes);
+      return {...state, ...{class: classes}};
     }
     case SET_CLASS:{
       return { class: action.payload };

@@ -21,10 +21,10 @@ def create_classes():
     if current_user.is_authenticated:
         
         data = request.json
-        
+
         new_class = Class(
-            name = data['name'],
-            user_id = 4 # data['user_id']
+            name = data['className'],
+            user_id = current_user.id # data['user_id']
         )
         
         db.session.add(new_class)

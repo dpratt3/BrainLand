@@ -2,18 +2,28 @@ import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { listCategory } from "../../store/categories";
+import { listCategory, createCategory } from "../../store/categories";
 import { Modal } from "../../context/Modal";
 
 
 function CategoryPage() {
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.category);
+  const [categoryName, setCategoryName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   
   useEffect(() => {
     dispatch(listCategory());
   }, []);
+
+  const callBack = () => {
+    setOpenModal(false);
+    setCategoryName("");
+  }
+
+  const callCreateCategory = () => {
+    dispatch(createCategory(categoryName, callBack));
+  };
 
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
@@ -41,6 +51,7 @@ function CategoryPage() {
             cursor: "pointer",
           }}
           onClick={() => setOpenModal(true)}
+          
         >
           Create Category
         </button>
@@ -66,6 +77,7 @@ function CategoryPage() {
             type="text"
             placeholder="Enter caterory name"
             style={{ height: 32, minWidth: 250, borderRadius: 8 , marginTop: 20}}
+            onChange={(e) => setCategoryName(e.target.value)}
           />
           <button
             name="create-category"
@@ -79,6 +91,7 @@ function CategoryPage() {
               fontWeight: 800,
               cursor: "pointer",
             }}
+            onClick={() => callCreateCategory()}
             // dispatch create category action with payload and openModal set to false 
             // onClick={() => }}
           >

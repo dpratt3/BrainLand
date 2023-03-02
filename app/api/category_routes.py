@@ -12,6 +12,23 @@ def get_all_categories():
     all_categories = [category.to_dict() for category in categories]
     return all_categories
 
+### create a category
+@category_routes.route('/', methods = ["POST"])
+def create_categories():
+        
+    data = request.json
+
+    new_category = Category(
+        name = data['name'],
+    )
+    
+    db.session.add(new_category)
+    db.session.commit()
+    
+
+    
+    return new_category.to_dict()
+
 ### Delete a category by id
 # @category_routes.route('/<int:id>', methods = ["DELETE"])
 # def delete_deck_by_id(id):

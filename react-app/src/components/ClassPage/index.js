@@ -2,16 +2,26 @@ import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { listClass } from "../../store/classes";
+import { createClass, listClass } from "../../store/classes";
 import { Modal } from "../CreateCategoryModal";
 
 function ClassPage() {
   const dispatch = useDispatch();
   const ClassList = useSelector((state) => state?.classes?.class || []);
+  const [className, setClassName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     dispatch(listClass());
   }, []);
+
+  const callBack = () => {
+    setOpenModal(false);
+    setClassName("");
+  }
+
+  const callCreateClass = () => {
+    dispatch(createClass(className, callBack));
+  };
 
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
@@ -21,7 +31,7 @@ function ClassPage() {
       <h1>Classes</h1>
       {/* - To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
       - To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
-            <div
+      <div
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -29,7 +39,7 @@ function ClassPage() {
         }}
       >
         <button
-          name="create-category"
+          name="create-class"
           style={{
             width: 240,
             height: 34,
@@ -43,9 +53,6 @@ function ClassPage() {
         >
           Create Class
         </button>
-
-        {/* do css, alignment, color etc. */}
-        {/* make it functional */}
       </div>
       {openModal && (
         <div
@@ -63,10 +70,16 @@ function ClassPage() {
           <input
             type="text"
             placeholder="Enter class name"
-            style={{ height: 32, minWidth: 250, borderRadius: 8 , marginTop: 20}}
+            style={{
+              height: 32,
+              minWidth: 250,
+              borderRadius: 8,
+              marginTop: 20,
+            }}
+            onChange={(e) => setClassName(e.target.value)}
           />
           <button
-            name="create-category"
+            name="create-class"
             style={{
               width: 240,
               marginTop: 40,
@@ -77,8 +90,7 @@ function ClassPage() {
               fontWeight: 800,
               cursor: "pointer",
             }}
-            // dispatch create category action with payload and openModal set to false 
-            // onClick={() => }}
+            onClick={() => callCreateClass()}
           >
             Create
           </button>
