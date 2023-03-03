@@ -28,3 +28,25 @@ img[type="link"]:hover {
 .link:hover { color: #065e06; } /* CSS link hover (green) */
 
 .title {color: #f8f4f4}
+
+.fancyButton {
+        width: 240px;
+        margin-top: 40px;
+        height: 34px;
+        background-color: #36013F;
+        color: white;
+        border: none;
+        font-weight: 800;
+        cursor: "pointer";
+        margin-right: 4px;
+        margin-left: 4px;
+}
+
+
+
+
+
+
+
+
+

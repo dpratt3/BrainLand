@@ -126,8 +126,9 @@ function CardPage() {
           </li>
         ))}
       </ul>
-      <button>Next Card</button>
-      <button>Previous Card</button>
+        <button className="fancyButton">Show Answer</button>
+        <button className="fancyButton">Next Card</button>
+        <button className="fancyButton">Previous Card</button>
     </>
   );
 }
