@@ -8,7 +8,7 @@ function CardPage() {
   const dispatch = useDispatch();
   const { deckId } = useParams();
   const CardList = useSelector((state) => state.cards.cards);
-  const [cardName, setCardName] = useState("");
+  
   const [cardQuestion, setCardQuestion] = useState("");
   const [cardAnswer, setCardAnswer] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -20,11 +20,12 @@ function CardPage() {
 
   const callBack = () => {
     setOpenModal(false);
-    setCardName("");
+    setCardQuestion("")
+    setCardAnswer("");
   }
 
   const callCreateCard = () => {
-    dispatch(createCard(cardName, callBack));
+    dispatch(createCard(cardQuestion, cardAnswer, deckId, callBack));
   };
 
   const sessionUser = useSelector((state) => state.session.user);

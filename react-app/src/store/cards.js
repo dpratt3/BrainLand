@@ -46,31 +46,36 @@ export const listCardByDeckId = (deckId) => async (dispatch) => {
   }
 };
 
-export const createCard = (cardQuestion, cardAnswer, deckId, callBack) => async(dispatch) => {
-  const response = await fetch(`/api/deck/?deck_id=${deckId}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({card_question: cardQuestion, card_answer: cardAnswer})
-  });
+export const createCard = (cardQuestion, cardAnswer, deckId, callBack) => async (dispatch) => {
+    const response = await fetch(`/api/card/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        deck_id: deckId,
+        card_question: cardQuestion,
+        card_answer: cardAnswer,
+      }),
+    });
 
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
+    if (response.ok) {
+      const data = await response.json();
+      if (data.errors) {
+        return;
+      }
+
+      dispatch(createCards({ card: data }));
+      callBack();
     }
-    dispatch(createCards(data));
-    callBack();
-  }
-};
+  };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case CREATE_CARD:{
+    case CREATE_CARD: {
       let cards = state.cards;
       cards.push(action.payload.card);
-      return {...state, ...{card: cards}};
+      return { ...state, ...{ card: cards } };
     }
     case SET_CARD: {
       return { cards: action.payload };
