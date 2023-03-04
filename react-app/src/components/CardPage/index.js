@@ -54,7 +54,7 @@ function CardPage() {
           <CustomButton
               variant="submit"
               title="Create Card"
-              onClick={() => setOpenModal(false)}
+              onClick={() => setOpenModal(true)}
           ></CustomButton>
           <a className="link" href={`/play/${deckId}`}>
             {/* <button class="fancyButton" disabled={CardList?.length === 0}>
