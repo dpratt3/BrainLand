@@ -41,7 +41,8 @@ function CardPage() {
         Create Card
       </button>
       <a className="link" href={`/play/${deckId}`}>
-        <button class="fancyButton">Play Deck</button>
+        <button class="fancyButton"
+        disabled={CardList?.length === 0}>Play Deck</button>
       </a>
       {openModal && (
         <div

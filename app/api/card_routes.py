@@ -44,13 +44,8 @@ def post_new_card():
         db.session.add(new_card)
         db.session.commit()
         
-        result = {
-            "id": new_card.id,
-            "card_question": new_card.card_question,
-            "card_answer": new_card.card_answer
-        }
     
-    return result
+    return new_card.to_dict()
         
 ### Delete a card by id (for a deck that they own)
 # post a card to a deck that they own

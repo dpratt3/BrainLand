@@ -31,15 +31,18 @@ function PlayDeck() {
   const onRetry = () => {
     setCurrentQuestionIndex(0);
     setShowAnswer(false);
-  }
+  };
 
   const deleteCard = async (card) => {
-    await dispatch(deleteCardByCardId(card?.id)) //.then(() => history.push('/songs'))
+    await dispatch(deleteCardByCardId(card?.id)); //.then(() => history.push('/songs'))
   };
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100vh" }}>
-      <div className="sidebar" style={{ color: "white", width: 200, textAlign: 'center' }}>
+      <div
+        className="sidebar"
+        style={{ color: "white", width: 200, textAlign: "center" }}
+      >
         {CardList?.map((card, index) => (
           <div>
             <h1
@@ -53,10 +56,22 @@ function PlayDeck() {
         ))}
       </div>
       <div className="main-section">
-        {currentQuestionIndex === CardList?.length && (
+        {CardList?.length === 0 && (
+          <div style={{ color: "white" }}>
+            <h1> Deck has no cards, please add cards</h1>
+            <a className="link" href={`/deck/${deckId}`}>
+              <button class="fancyButton">
+                Back
+              </button>
+            </a>
+          </div>
+        )}
+        {CardList?.length > 0 && currentQuestionIndex === CardList?.length && (
           <div style={{ color: "white" }}>
             <h1> You have successfully completed this deck!</h1>
-            <button className="fancyButton" onClick={onRetry}>Retry</button>
+            <button className="fancyButton" onClick={onRetry}>
+              Retry
+            </button>
           </div>
         )}
 
@@ -99,7 +114,7 @@ function PlayDeck() {
                 // disabled={currentQuestionIndex === 0}
               >
                 Delete Card
-                </button>
+              </button>
             </div>
           </div>
         )}

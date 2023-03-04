@@ -91,7 +91,7 @@ export default function reducer(state = initialState, action) {
     case CREATE_CARD: {
       let cards = state.cards;
       cards.push(action.payload.card);
-      return { ...state, ...{ card: cards } };
+      return { ...state, ...{ cards: cards } };
     }
     case SET_CARD: {
       return { cards: action.payload };
