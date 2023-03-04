@@ -37,7 +37,11 @@ const CustomButton = ({ variant, title, disabled, onClick }) => {
         borderRadius: 8,
         fontWeight: 700,
         fontSize: 18,
-        opacity: `${disabled ? 0.5 : 1}`
+        opacity: `${disabled ? 0.5 : 1}`,
+        color: `${disabled ? "gray": color}`,
+        marginLeft: 4,
+        marginRight: 4
+
       }}
       onClick={onClick}
       disabled={disabled ? disabled : false}

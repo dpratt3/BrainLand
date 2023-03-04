@@ -43,18 +43,29 @@ function CardPage() {
       >
         <h1 className="title">List of Cards</h1>
 
-        <div>
-          <button
+        <div style={{ display: "flex", justifyContent: "space-between"}}>
+          {/* <button
             className="fancyButton"
             name="create-card"
             onClick={() => setOpenModal(true)}
           >
             Create Card
-          </button>
+          </button> */}
+          <CustomButton
+              variant="submit"
+              title="Create Card"
+              onClick={() => setOpenModal(false)}
+          ></CustomButton>
           <a className="link" href={`/play/${deckId}`}>
-            <button class="fancyButton" disabled={CardList?.length === 0}>
+            {/* <button class="fancyButton" disabled={CardList?.length === 0}>
               Play Deck
-            </button>
+            </button> */}
+            <CustomButton
+              variant="submit"
+              title="Play Deck"
+              onClick={() => setOpenModal(false)}
+              disabled={CardList?.length === 0}
+            ></CustomButton>
           </a>
         </div>
       </div>
