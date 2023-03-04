@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { listCardByDeckId } from "../../store/cards";
+import { deleteCardByCardId } from "../../store/cards";
 
 function PlayDeck() {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ function PlayDeck() {
     setCurrentQuestionIndex(0);
     setShowAnswer(false);
   }
+
+  const deleteCard = async (card) => {
+    await dispatch(deleteCardByCardId(card?.id)) //.then(() => history.push('/songs'))
+  };
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100vh" }}>
@@ -88,6 +93,13 @@ function PlayDeck() {
               >
                 Previous Card
               </button>
+              <button
+                className="fancyDeleteButton"
+                onClick={() => deleteCard(CardList[currentQuestionIndex])}
+                // disabled={currentQuestionIndex === 0}
+              >
+                Delete Card
+                </button>
             </div>
           </div>
         )}

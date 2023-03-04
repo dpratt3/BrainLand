@@ -1,6 +1,7 @@
 // constants
 const SET_CARD = "question/SET_CARD";
 const CREATE_CARD = "questions/CREATE_CARD";
+const DELETE_CARD = "questions/DELETE_CARD";
 
 const setCards = (cards) => ({
   type: SET_CARD,
@@ -10,6 +11,11 @@ const setCards = (cards) => ({
 const createCards = (card) => ({
   type: CREATE_CARD,
   payload: card,
+});
+
+const deleteCards = (cardId) => ({
+  type: DELETE_CARD,
+  payload: cardId,
 });
 
 const initialState = { cards: [] };
@@ -46,7 +52,8 @@ export const listCardByDeckId = (deckId) => async (dispatch) => {
   }
 };
 
-export const createCard = (cardQuestion, cardAnswer, deckId, callBack) => async (dispatch) => {
+export const createCard =
+  (cardQuestion, cardAnswer, deckId, callBack) => async (dispatch) => {
     const response = await fetch(`/api/card/`, {
       method: "POST",
       headers: {
@@ -70,6 +77,15 @@ export const createCard = (cardQuestion, cardAnswer, deckId, callBack) => async 
     }
   };
 
+  export const deleteCardByCardId = (cardId) => async(dispatch) => {
+    const options = {
+        method: "DELETE"
+    }
+    const response = await fetch(`/api/card/${cardId}`, options);
+    dispatch(deleteCards(cardId));
+    return response
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_CARD: {
@@ -79,6 +95,12 @@ export default function reducer(state = initialState, action) {
     }
     case SET_CARD: {
       return { cards: action.payload };
+    }
+    case DELETE_CARD: {
+      const newState = {...state};
+      const cardId = action.payload;
+      let cards = newState?.cards;
+      return {cards: cards.filter((card) => card?.id !== cardId)}
     }
     default:
       return state;

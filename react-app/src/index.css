@@ -47,6 +47,19 @@ img[type="link"]:hover {
 /* hide button if disabled to avoid having deadlinks */
 button[disabled] { display: none; }
 
+.fancyDeleteButton {
+    width: 240px;
+    margin-top: 10px;
+    height: 34px;
+    background-color: #36013F;
+    color: white;
+    border: none;
+    font-weight: 800;
+    cursor: "pointer";
+    margin-right: 14px;
+    margin-left: 4px;
+    background-image: linear-gradient(45deg, red, black);
+}
 
 
 
