@@ -8,7 +8,7 @@ function CardPage() {
   const dispatch = useDispatch();
   const { deckId } = useParams();
   const CardList = useSelector((state) => state.cards.cards);
-  
+
   const [cardQuestion, setCardQuestion] = useState("");
   const [cardAnswer, setCardAnswer] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -20,9 +20,9 @@ function CardPage() {
 
   const callBack = () => {
     setOpenModal(false);
-    setCardQuestion("")
+    setCardQuestion("");
     setCardAnswer("");
-  }
+  };
 
   const callCreateCard = () => {
     dispatch(createCard(cardQuestion, cardAnswer, deckId, callBack));
@@ -33,21 +33,16 @@ function CardPage() {
 
   return (
     <>
-      <h1 className="title">Cards</h1>
-      <button 
-            name="create-card"
-            style={{
-            width: 240,
-            height: 34,
-            backgroundColor: "#36013F",
-            color: "white",
-            border: "none",
-            fontWeight: 800,
-            cursor: "pointer",
-          }}
-          onClick={() => setOpenModal(true)}
-          >Create Card
+      <h1 className="title">Card Question Detail</h1>
+      <button className="fancyButton"
+        name="create-card"
+        onClick={() => setOpenModal(true)}
+      >
+        Create Card
       </button>
+      <a className="link" href={`/play/${deckId}`}>
+        <button class="fancyButton">Play Deck</button>
+      </a>
       {openModal && (
         <div
           style={{
@@ -72,7 +67,7 @@ function CardPage() {
             }}
             onChange={(e) => setCardQuestion(e.target.value)}
           /> */}
-           <input
+          <input
             type="text"
             placeholder="Enter card question"
             style={{
@@ -83,7 +78,7 @@ function CardPage() {
             }}
             onChange={(e) => setCardQuestion(e.target.value)}
           />
-           <input
+          <input
             type="text"
             placeholder="Enter card answer"
             style={{
@@ -94,20 +89,7 @@ function CardPage() {
             }}
             onChange={(e) => setCardAnswer(e.target.value)}
           />
-          <button
-            name="create-card"
-            style={{
-              width: 240,
-              marginTop: 40,
-              height: 34,
-              backgroundColor: "#36013F",
-              color: "white",
-              border: "none",
-              fontWeight: 800,
-              cursor: "pointer",
-            }}
-            onClick={() => callCreateCard()}
-          >
+          <button className="fancyButton" onClick={() => callCreateCard()}>
             Create
           </button>
         </div>
@@ -116,19 +98,20 @@ function CardPage() {
       {/* - To Do: Create decks button (On click it will open create
       deck modal (ambitions) or form (conservative) - To Do: List of decks for
       selected class ( on right side there will be two buttons, 1. Add Cards, 2.
-      Study deck) */}
-      
+      play deck) */}
+
       <ul>
         {CardList?.map((card) => (
           <li key={card?.id}>
-            <p style={{color: '#f8f4f4'}}>{card?.card_question}</p>
-            <p style={{color: '#f8f4f4'}}>{card?.card_answer}</p>
+            <ul style={{ color: "#f8f4f4" }}>{card?.card_question}</ul>
+            {/* <p style={{ color: "#f8f4f4" }}>{card?.card_answer}</p> */}
           </li>
         ))}
       </ul>
-        <button className="fancyButton">Show Answer</button>
-        <button className="fancyButton">Next Card</button>
-        <button className="fancyButton">Previous Card</button>
+
+      {/* <button className="fancyButton">Show Answer</button>
+      <button className="fancyButton">Next Card</button>
+      <button className="fancyButton">Previous Card</button> */}
     </>
   );
 }

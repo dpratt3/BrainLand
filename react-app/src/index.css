@@ -29,9 +29,10 @@ img[type="link"]:hover {
 
 .title {color: #f8f4f4}
 
+/* styling for all buttons */
 .fancyButton {
         width: 240px;
-        margin-top: 40px;
+        margin-top: 10px;
         height: 34px;
         background-color: #36013F;
         color: white;
@@ -40,12 +41,11 @@ img[type="link"]:hover {
         cursor: "pointer";
         margin-right: 4px;
         margin-left: 4px;
+        background-image: linear-gradient(45deg, purple, black);
 }
 
-
-
-
-
+/* hide button if disabled to avoid having deadlinks */
+button[disabled] { display: none; }
 
 
 

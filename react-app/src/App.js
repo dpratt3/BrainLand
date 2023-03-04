@@ -10,7 +10,8 @@ import DashboardPage from "./components/DashboardPage";
 import CategoryPage from "./components/CategoryPage";
 import DeckPage from "./components/DeckPage";
 import CardPage from "./components/CardPage";
-import ClassPage from "./components/ClassPage"
+import ClassPage from "./components/ClassPage";
+import PlayDeck from "./components/PlayDeck";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route path="/login">
             <LoginFormPage />
           </Route>
           <Route path="/signup">
@@ -32,7 +33,7 @@ function App() {
           </Route>
           <Route path="/category">
             <CategoryPage />
-          </Route>         
+          </Route>
           <Route exact path="/class">
             <ClassPage />
           </Route>
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/dashboard">
             <DashboardPage />
+          </Route>
+          <Route path="/play/:deckId">
+            <PlayDeck />
           </Route>
           <Route path="/">
             <HomePage />
