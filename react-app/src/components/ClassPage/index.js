@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createClass, listClass } from "../../store/classes";
 import { Modal } from "../CreateCategoryModal";
+import CustomButton from "../Button/Button";
 
 function ClassPage() {
   const dispatch = useDispatch();
   const ClassList = useSelector((state) => state?.classes?.class || []);
   const [className, setClassName] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  
   useEffect(() => {
     dispatch(listClass());
   }, []);
@@ -17,7 +19,7 @@ function ClassPage() {
   const callBack = () => {
     setOpenModal(false);
     setClassName("");
-  }
+  };
 
   const callCreateClass = () => {
     dispatch(createClass(className, callBack));
@@ -38,7 +40,7 @@ function ClassPage() {
           paddingRight: 40,
         }}
       >
-        <button
+        {/* <button
           name="create-class"
           style={{
             width: 240,
@@ -52,7 +54,12 @@ function ClassPage() {
           onClick={() => setOpenModal(true)}
         >
           Create Class
-        </button>
+        </button> */}
+        <CustomButton
+          variant="submit"
+          title="Create Class"
+          onClick={() => setOpenModal(true)}
+        ></CustomButton>
       </div>
       {openModal && (
         <div
@@ -78,7 +85,7 @@ function ClassPage() {
             }}
             onChange={(e) => setClassName(e.target.value)}
           />
-          <button
+          {/* <button
             name="create-class"
             style={{
               width: 240,
@@ -93,13 +100,20 @@ function ClassPage() {
             onClick={() => callCreateClass()}
           >
             Create
-          </button>
+          </button> */}
+            <CustomButton
+              variant="submit"
+              title="Submit"
+              onClick={() => setOpenModal(false)}
+            ></CustomButton>
         </div>
       )}
       <ul>
         {ClassList?.map((cl) => (
           <li key={cl.id}>
-            <a className="link" href={`/class/${cl?.id}`}>{cl?.name}</a>
+            <a className="link" href={`/class/${cl?.id}`}>
+              {cl?.name}
+            </a>
           </li>
         ))}
       </ul>

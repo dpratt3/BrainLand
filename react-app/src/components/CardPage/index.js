@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createCard, listCardByDeckId } from "../../store/cards";
+import CustomButton from "../Button/Button";
 
 function CardPage() {
   const dispatch = useDispatch();
@@ -33,17 +34,30 @@ function CardPage() {
 
   return (
     <>
-      <h1 className="title">Card Question Detail</h1>
-      <button className="fancyButton"
-        name="create-card"
-        onClick={() => setOpenModal(true)}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 40,
+        }}
       >
-        Create Card
-      </button>
-      <a className="link" href={`/play/${deckId}`}>
-        <button class="fancyButton"
-        disabled={CardList?.length === 0}>Play Deck</button>
-      </a>
+        <h1 className="title">List of Cards</h1>
+
+        <div>
+          <button
+            className="fancyButton"
+            name="create-card"
+            onClick={() => setOpenModal(true)}
+          >
+            Create Card
+          </button>
+          <a className="link" href={`/play/${deckId}`}>
+            <button class="fancyButton" disabled={CardList?.length === 0}>
+              Play Deck
+            </button>
+          </a>
+        </div>
+      </div>
       {openModal && (
         <div
           style={{
@@ -73,9 +87,10 @@ function CardPage() {
             placeholder="Enter card question"
             style={{
               height: 32,
-              minWidth: 250,
+              minWidth: 400,
               borderRadius: 8,
               marginTop: 20,
+              padding: 8,
             }}
             onChange={(e) => setCardQuestion(e.target.value)}
           />
@@ -84,15 +99,37 @@ function CardPage() {
             placeholder="Enter card answer"
             style={{
               height: 32,
-              minWidth: 250,
+              minWidth: 400,
               borderRadius: 8,
               marginTop: 20,
+              padding: 8,
             }}
             onChange={(e) => setCardAnswer(e.target.value)}
           />
-          <button className="fancyButton" onClick={() => callCreateCard()}>
-            Create
-          </button>
+
+          <div style={{ display: "flex", gap: 20, marginTop: 40 }}>
+            <CustomButton
+              variant="cancel"
+              title="Cancel"
+              onClick={() => setOpenModal(false)}
+            ></CustomButton>
+
+            <CustomButton
+              variant="submit"
+              title="Create"
+              onClick={() => callCreateCard()}
+            ></CustomButton>
+            {/* <button
+              className="fancyButton"
+              name="create-card"
+              onClick={() => setOpenModal(false)}
+            >
+              Cancel
+            </button>
+            <button className="fancyButton" onClick={() => callCreateCard()}>
+              Create
+            </button> */}
+          </div>
         </div>
       )}
 
@@ -101,15 +138,18 @@ function CardPage() {
       selected class ( on right side there will be two buttons, 1. Add Cards, 2.
       play deck) */}
 
-      <ul>
-        {CardList?.map((card) => (
-          <li key={card?.id}>
-            <ul style={{ color: "#f8f4f4" }}>{card?.card_question}</ul>
-            {/* <p style={{ color: "#f8f4f4" }}>{card?.card_answer}</p> */}
-          </li>
-        ))}
-      </ul>
-
+      <div style={{ padding: 40 }}>
+        <ol>
+          {CardList?.map((card) => (
+            <li
+              key={card?.id}
+              style={{ color: "#f8f4f4", fontSize: 34, fontWeight: 600 }}
+            >
+              {card?.card_question}
+            </li>
+          ))}
+        </ol>
+      </div>
       {/* <button className="fancyButton">Show Answer</button>
       <button className="fancyButton">Next Card</button>
       <button className="fancyButton">Previous Card</button> */}

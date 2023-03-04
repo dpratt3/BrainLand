@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { listCategory, createCategory } from "../../store/categories";
 import { Modal } from "../../context/Modal";
-
+import CustomButton from "../Button/Button";
 
 function CategoryPage() {
   const dispatch = useDispatch();
   const categoryList = useSelector((state) => state.categories.category);
   const [categoryName, setCategoryName] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  
+
   useEffect(() => {
     dispatch(listCategory());
   }, []);
@@ -19,7 +19,7 @@ function CategoryPage() {
   const callBack = () => {
     setOpenModal(false);
     setCategoryName("");
-  }
+  };
 
   const callCreateCategory = () => {
     dispatch(createCategory(categoryName, callBack));
@@ -31,7 +31,7 @@ function CategoryPage() {
   //   categories are like subjects
   return (
     <>
-       <h1 className="title">Categories</h1>
+      <h1 className="title">Categories</h1>
       <div
         style={{
           display: "flex",
@@ -39,7 +39,7 @@ function CategoryPage() {
           paddingRight: 40,
         }}
       >
-        <button
+        {/* <button
           name="create-category"
           style={{
             width: 240,
@@ -54,7 +54,12 @@ function CategoryPage() {
           
         >
           Create Category
-        </button>
+        </button> */}
+        <CustomButton
+          variant="submit"
+          title="Create Category"
+          onClick={() => setOpenModal(true)}
+        ></CustomButton>
 
         {/* do css, alignment, color etc. */}
         {/* make it functional */}
@@ -76,10 +81,15 @@ function CategoryPage() {
           <input
             type="text"
             placeholder="Enter category name"
-            style={{ height: 32, minWidth: 250, borderRadius: 8 , marginTop: 20}}
+            style={{
+              height: 32,
+              minWidth: 250,
+              borderRadius: 8,
+              marginTop: 20,
+            }}
             onChange={(e) => setCategoryName(e.target.value)}
           />
-          <button
+          {/* <button
             name="create-category"
             style={{
               width: 240,
@@ -92,17 +102,24 @@ function CategoryPage() {
               cursor: "pointer",
             }}
             onClick={() => callCreateCategory()}
-            // dispatch create category action with payload and openModal set to false 
+            // dispatch create category action with payload and openModal set to false
             // onClick={() => }}
           >
             Create
-          </button>
+          </button> */}
+        <CustomButton
+          variant="submit"
+          title="Submit"
+          onClick={() => setOpenModal(true)}
+        ></CustomButton>
         </div>
       )}
       <ul>
         {categoryList?.map((category) => (
           <li key={category.id}>
-            <a className="link" href={category?.name}>{category.name}</a>
+            <a className="link" href={category?.name}>
+              {category.name}
+            </a>
           </li>
         ))}
       </ul>

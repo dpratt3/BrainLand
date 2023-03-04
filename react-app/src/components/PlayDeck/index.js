@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { listCardByDeckId } from "../../store/cards";
 import { deleteCardByCardId } from "../../store/cards";
+import CustomButton from "../Button/Button";
 
 function PlayDeck() {
   const dispatch = useDispatch();
@@ -60,9 +61,7 @@ function PlayDeck() {
           <div style={{ color: "white" }}>
             <h1> Deck has no cards, please add cards</h1>
             <a className="link" href={`/deck/${deckId}`}>
-              <button class="fancyButton">
-                Back
-              </button>
+              <button class="fancyButton">Back</button>
             </a>
           </div>
         )}
@@ -90,11 +89,42 @@ function PlayDeck() {
               </>
             )}
 
-            <div>
-              <button className="fancyButton" onClick={onShowAnswer}>
-                Show Answer
-              </button>
-              <button
+            <div
+              style={{
+                display: "flex",
+                gap: 20,
+                justifyContent: "center",
+                alignItems: "center",
+                height: 800,
+              }}
+            >
+              <CustomButton
+                variant="success"
+                title="Show Answer"
+                onClick={onShowAnswer}
+              ></CustomButton>
+
+              <CustomButton
+                variant="info"
+                title="Previous Card"
+                onClick={() => changeQuestion(-1)}
+                disabled={currentQuestionIndex === 0}
+              ></CustomButton>
+
+              <CustomButton
+                variant="info"
+                title=" Next Card"
+                onClick={() => changeQuestion(1)}
+                disabled={currentQuestionIndex === CardList?.length}
+              ></CustomButton>
+
+              <CustomButton
+                variant="delete"
+                title="Delete Card"
+                onClick={() => deleteCard(CardList[currentQuestionIndex])}
+              ></CustomButton>
+
+              {/* <button
                 className="fancyButton"
                 onClick={() => changeQuestion(1)}
                 disabled={currentQuestionIndex === CardList?.length}
@@ -107,14 +137,14 @@ function PlayDeck() {
                 disabled={currentQuestionIndex === 0}
               >
                 Previous Card
-              </button>
-              <button
+              </button> */}
+              {/* <button
                 className="fancyDeleteButton"
                 onClick={() => deleteCard(CardList[currentQuestionIndex])}
                 // disabled={currentQuestionIndex === 0}
               >
                 Delete Card
-              </button>
+              </button> */}
             </div>
           </div>
         )}

@@ -58,7 +58,6 @@ export default function reducer(state = initialState, action) {
       return {...state, ...{category: categories}};
     }
     case SET_CATEGORY: {
-      debugger;
       return { category: action.payload };
     }
     default:
