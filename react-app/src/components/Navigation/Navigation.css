@@ -1,5 +1,6 @@
 .profile-dropdown {
   position: absolute;
+  background-color: "#333";
 }
 
 .hidden {
@@ -14,4 +15,17 @@
 .active-nav {
   font-weight: 900;
   font-size: 18px;
+}
+
+.profile-dropdown{
+  padding: 10;
+  color: "#fff"; 
+  display: "flex"; 
+  flex-direction: "column"; 
+  position: "absolute"; 
+  background-color: "#333"; 
+  width: 150; 
+  right: 0; 
+  top: 40; 
+  border-radius: 4;
 }

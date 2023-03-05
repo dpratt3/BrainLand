@@ -83,9 +83,10 @@ function CategoryPage() {
             placeholder="Enter category name"
             style={{
               height: 32,
-              minWidth: 250,
+              minWidth: 400,
               borderRadius: 8,
               marginTop: 20,
+              marginBottom: 8
             }}
             onChange={(e) => setCategoryName(e.target.value)}
           />
@@ -107,11 +108,21 @@ function CategoryPage() {
           >
             Create
           </button> */}
-        <CustomButton
-          variant="submit"
-          title="Submit"
-          onClick={() => setOpenModal(true)}
-        ></CustomButton>
+
+        <div style={{display: "flex", gap: "20", marginTop: "40"}}>
+          <CustomButton
+            variant="submit"
+            title="Submit"
+            onClick={() => callCreateCategory()}
+          ></CustomButton>
+
+          <CustomButton
+            variant="cancel"
+            title="Cancel"
+            onClick={() => setOpenModal(false)}
+          ></CustomButton>
+          </div>
+
         </div>
       )}
       <ul>

@@ -55,11 +55,17 @@ function ClassPage() {
         >
           Create Class
         </button> */}
+        
+        
         <CustomButton
           variant="submit"
           title="Create Class"
           onClick={() => setOpenModal(true)}
         ></CustomButton>
+
+
+
+
       </div>
       {openModal && (
         <div
@@ -79,9 +85,11 @@ function ClassPage() {
             placeholder="Enter class name"
             style={{
               height: 32,
-              minWidth: 250,
+              minWidth: 390,
               borderRadius: 8,
               marginTop: 20,
+              padding: 8,
+              marginBottom: 8
             }}
             onChange={(e) => setClassName(e.target.value)}
           />
@@ -101,11 +109,20 @@ function ClassPage() {
           >
             Create
           </button> */}
-            <CustomButton
-              variant="submit"
-              title="Submit"
-              onClick={() => setOpenModal(false)}
-            ></CustomButton>
+
+          <div style={{display: "flex", gap: "20", marginTop: "40"}}>
+          <CustomButton
+            variant="submit"
+            title="Submit"
+            onClick={() => setOpenModal(false)}
+          ></CustomButton>
+
+          <CustomButton
+            variant="cancel"
+            title="Cancel"
+            onClick={() => setOpenModal(false)}
+          ></CustomButton>
+          </div>
         </div>
       )}
       <ul>

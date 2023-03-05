@@ -7,8 +7,8 @@ category_routes = Blueprint('category', __name__)
 ### get all decks
 @category_routes.route('/', methods = ["GET"])
 def get_all_categories():
-    if current_user.is_authenticated:
-        categories = Category.query.all()
+    #if current_user.is_authenticated:
+    categories = Category.query.all()
     all_categories = [category.to_dict() for category in categories]
     return all_categories
 

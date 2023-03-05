@@ -118,18 +118,20 @@ function CardPage() {
             onChange={(e) => setCardAnswer(e.target.value)}
           />
 
-          <div style={{ display: "flex", gap: 20, marginTop: 40 }}>
+          <div style={{ display: "flex", gap: 8, marginTop: 40 }}>
+          <CustomButton
+              variant="submit"
+              title="Submit"
+              onClick={() => callCreateCard()}
+            ></CustomButton>
+
             <CustomButton
               variant="cancel"
               title="Cancel"
               onClick={() => setOpenModal(false)}
             ></CustomButton>
 
-            <CustomButton
-              variant="submit"
-              title="Create"
-              onClick={() => callCreateCard()}
-            ></CustomButton>
+
             {/* <button
               className="fancyButton"
               name="create-card"

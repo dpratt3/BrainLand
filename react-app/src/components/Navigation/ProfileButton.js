@@ -38,18 +38,21 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
-      <button onClick={openMenu}>
+    <div style={{ position: "relative"}}>
+      <button onClick={openMenu} style={{ backgroundColor: "#2898dd", marginRight: "4px" }}>
         <i className="fas fa-user-circle" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
+            {/* <li>{user.username}</li> */}
+            
+            <span style={{ margin: "auto 4", marginRight: "4px" }}>{user.email}</span>
+            <hr style={{ width: "100%" }} />
+            <span>
+              <button style={{ backgroundColor: "#ff5614"}} onClick={handleLogout}>Log Out</button>
+            </span>
           </>
         ) : (
           <>
@@ -66,8 +69,8 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
 

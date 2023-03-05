@@ -22,7 +22,7 @@ function DemoUserButton() {
   
   return (
     <>
-    <button style={{ backgroundColor: "#295970" }} onClick={demoUserLogin}>Demo User</button>
+    <button style={{ backgroundColor: "#295970", marginRight: "4px" }} onClick={demoUserLogin}>Demo User</button>
     </>
   );
 }
