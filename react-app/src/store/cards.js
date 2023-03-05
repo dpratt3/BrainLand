@@ -1,6 +1,7 @@
 // constants
 const SET_CARD = "question/SET_CARD";
 const CREATE_CARD = "questions/CREATE_CARD";
+const UPDATE_CARD = "questions/UPDATE_CARD";
 const DELETE_CARD = "questions/DELETE_CARD";
 
 const setCards = (cards) => ({
@@ -10,6 +11,11 @@ const setCards = (cards) => ({
 
 const createCards = (card) => ({
   type: CREATE_CARD,
+  payload: card,
+});
+
+const updateCards = (card) => ({
+  type: UPDATE_CARD,
   payload: card,
 });
 
@@ -77,6 +83,26 @@ export const createCard =
     }
   };
 
+export const updateCard = (card, callBack) => async (dispatch) => {
+  const response = await fetch(`/api/card/`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(card),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(updateCards(data));
+    callBack();
+  }
+}
+
   export const deleteCardByCardId = (cardId) => async(dispatch) => {
     const options = {
         method: "DELETE"
@@ -91,6 +117,15 @@ export default function reducer(state = initialState, action) {
     case CREATE_CARD: {
       let cards = state.cards;
       cards.push(action.payload.card);
+      return { ...state, ...{ cards: cards } };
+    }
+    case UPDATE_CARD: {
+      let cards = state.cards?.map(card => {
+        if(card?.id === action?.payload?.id){
+          return action?.payload;
+        }
+        return card;
+      })
       return { ...state, ...{ cards: cards } };
     }
     case SET_CARD: {

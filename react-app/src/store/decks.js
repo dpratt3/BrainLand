@@ -1,6 +1,6 @@
 // constants
 const SET_DECK = "deck/SET_DECk";
-const CREATE_DECK  = "class/CREATE_DECK";
+const CREATE_DECK = "class/CREATE_DECK";
 const EDIT_DECK = "class/EDIT_DECK";
 const DELETE_DECK = "class/DELETE_DECK";
 
@@ -11,8 +11,8 @@ const setDecks = (decks) => ({
 
 const createDecks = (decks) => ({
   type: CREATE_DECK,
-  payload: decks
-}) 
+  payload: decks,
+});
 
 const editDecks = (decks) => ({
   type: EDIT_DECK,
@@ -26,13 +26,13 @@ const deleteDecks = (decks) => ({
 
 const initialState = { deck: null };
 
-export const createDeck = (decks) => async(dispatch) => {
+export const createDeck = (deckName, classId, callBack) => async (dispatch) => {
   const response = await fetch("/api/deck/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(decks)
+    body: JSON.stringify({ class_id: classId, name: deckName }),
   });
 
   if (response.ok) {
@@ -41,6 +41,7 @@ export const createDeck = (decks) => async(dispatch) => {
       return;
     }
     dispatch(createDecks(data));
+    callBack();
   }
 };
 
@@ -61,7 +62,6 @@ export const listDeck = () => async (dispatch) => {
 };
 
 export const listDeckByClassId = (class_id) => async (dispatch) => {
-  
   const response = await fetch(`/api/deck/?class_id=${class_id}`, {
     headers: {
       "Content-Type": "application/json",
@@ -76,13 +76,13 @@ export const listDeckByClassId = (class_id) => async (dispatch) => {
   }
 };
 
-export const editDeck = (decks, deckId) => async(dispatch) => {
+export const editDeck = (decks, deckId) => async (dispatch) => {
   const response = await fetch(`/api/deck/${deckId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(decks)
+    body: JSON.stringify(decks),
   });
 
   if (response.ok) {
@@ -94,9 +94,9 @@ export const editDeck = (decks, deckId) => async(dispatch) => {
   }
 };
 
-export const deleteDeck = (decks, deckId) => async(dispatch) => {
+export const deleteDeck = (decks, deckId) => async (dispatch) => {
   const response = await fetch(`/api/deck/${deckId}`, {
-    method: "DELETE"
+    method: "DELETE",
   });
 
   if (response.ok) {
@@ -110,22 +110,22 @@ export const deleteDeck = (decks, deckId) => async(dispatch) => {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case CREATE_DECK:{
-      const newState = {...state}
-      newState[action.decks.id] = action.decks
-      return newState;
+    case CREATE_DECK: {
+      let decks = state.deck;
+      decks.push(action.payload);
+      return { ...state, ...{ deck: decks } };
     }
-    case SET_DECK:{
+    case SET_DECK: {
       return { deck: action.payload };
     }
-    case EDIT_DECK:{
-      const newState = {...state}
-      newState[action.decks.id] = action.classes
+    case EDIT_DECK: {
+      const newState = { ...state };
+      newState[action.decks.id] = action.classes;
       return newState;
     }
-    case DELETE_DECK:{
-      const newState = {...state}
-      delete newState[action.decks.id]
+    case DELETE_DECK: {
+      const newState = { ...state };
+      delete newState[action.decks.id];
       return newState;
     }
     default:

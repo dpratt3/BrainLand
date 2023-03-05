@@ -22,7 +22,7 @@ function DeckPage() {
   }, []);
 
   const callCreateDeck = () => {
-    dispatch(createDeck(deckName, callBack));
+    dispatch(createDeck(deckName, classId, callBack));
   };
 
   const sessionUser = useSelector((state) => state.session.user);

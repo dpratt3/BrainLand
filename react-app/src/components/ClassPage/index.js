@@ -114,7 +114,8 @@ function ClassPage() {
           <CustomButton
             variant="submit"
             title="Submit"
-            onClick={() => setOpenModal(false)}
+            disabled={className?.length === 0 }
+            onClick={() => callCreateClass()}
           ></CustomButton>
 
           <CustomButton

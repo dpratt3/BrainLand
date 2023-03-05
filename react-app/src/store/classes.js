@@ -57,7 +57,7 @@ export const createClass = (className, callBack) => async(dispatch) => {
     if (data.errors) {
       return;
     }
-    dispatch(createClasses({classes: data}));
+    dispatch(createClasses({newClass: data}));
     callBack();
   }
 };
@@ -97,9 +97,9 @@ export const deleteClass = (classes, classId) => async(dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_CLASS:{
-      let classes = state.class;
-      classes.push(action.payload.classes);
-      return {...state, ...{class: classes}};
+      let classList = state.class;
+      classList.push(action.payload.newClass);
+      return {...state, ...{class: classList}};
     }
     case SET_CLASS:{
       return { class: action.payload };
