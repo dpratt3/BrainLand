@@ -44,13 +44,39 @@ def post_new_card():
         db.session.add(new_card)
         db.session.commit()
         
-        result = {
-            "id": new_card.id,
-            "card_question": new_card.card_question,
-            "card_answer": new_card.card_answer
-        }
     
-    return result
+    return new_card.to_dict()
+
+
+# update card
+@card_routes.route('/', methods = ["PUT"])
+def update_card():
+    if current_user.is_authenticated:
+        updated_card = request.json
+        
+        deck_obj = Deck.query.get(updated_card['deck_id'])
+        if not deck_obj:
+            return "Deck does not exist (yet)", 404
+        
+        card_obj = Card.query.get(updated_card['id'])
+        if not card_obj:
+            return "Card does not exist (yet) with given id", 404
+        
+        # User must own the class that owns the deck
+        class_id = deck_obj.class_id
+        class_obj = Class.query.get(class_id)
+         
+        if class_obj.user_id != current_user.id:
+            return "User does not own class that owns deck", 401
+    
+        card_obj.card_question = updated_card['card_question']
+        card_obj.card_answer= updated_card['card_answer']
+        
+        db.session.add(card_obj)
+        db.session.commit()
+        
+    
+    return card_obj.to_dict()
         
 ### Delete a card by id (for a deck that they own)
 # post a card to a deck that they own

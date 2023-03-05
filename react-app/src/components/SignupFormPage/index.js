@@ -43,7 +43,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        <label>
+        {/* <label>
           Username
           <input
             type="text"
@@ -51,7 +51,7 @@ function SignupFormPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </label>
+        </label> */}
         <label>
           Password
           <input

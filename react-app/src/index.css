@@ -1,1 +1,65 @@
 /* TODO Add site wide styles */
+body{
+    margin: 0px;
+    background-color: black;
+    background-image: linear-gradient(-90deg, purple, black);
+}
+
+button {
+    border-radius: 4px;
+}
+
+button[type=submit] {
+    background-color: #333 !important;
+}
+
+button:hover:enabled{
+    border: 2px solid #235a71;
+    background-color: #235a71 !important;
+    cursor: pointer;
+}
+
+img[type="link"]:hover {
+    box-shadow: 5px 5px;
+    border: 2px solid grey;
+}
+
+.link { color: #f8f4f4} /* CSS link color (red) */
+.link:hover { color: #065e06; } /* CSS link hover (green) */
+
+.title {color: #f8f4f4}
+
+/* styling for all buttons */
+.fancyButton {
+        width: 240px;
+        margin-top: 10px;
+        height: 34px;
+        background-color: #36013F;
+        color: white;
+        border: none;
+        font-weight: 800;
+        cursor: "pointer";
+        margin-right: 4px;
+        margin-left: 4px;
+        background-image: linear-gradient(45deg, purple, black);
+}
+
+/* hide button if disabled to avoid having deadlinks */
+button[disabled] { display: none; }
+
+.fancyDeleteButton {
+    width: 240px;
+    margin-top: 10px;
+    height: 34px;
+    background-color: #36013F;
+    color: white;
+    border: none;
+    font-weight: 800;
+    cursor: "pointer";
+    margin-right: 14px;
+    margin-left: 4px;
+    background-image: linear-gradient(45deg, red, black);
+}
+
+
+

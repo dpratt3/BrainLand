@@ -14,10 +14,7 @@ def get_all_decks():
         
         if class_id != None:
             all_decks = [deck for deck in all_decks if deck['class_id'] == int(class_id)]
-        
-    
-    
-    
+            
     return all_decks
 
 ### Edit a deck name for a class that they own
@@ -65,9 +62,8 @@ def create_decks():
     if current_user.is_authenticated:
         
         data = request.json
-        
         # Verify that user owns class
-        class_id = data['class_id'] 
+        class_id = int(data['class_id']) 
         class_obj = Class.query.get(class_id)
         if(class_obj.user_id != current_user.id):
             return "User does not own class", 401
