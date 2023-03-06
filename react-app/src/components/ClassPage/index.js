@@ -5,13 +5,16 @@ import { Redirect, useParams } from "react-router-dom";
 import { createClass, listClass } from "../../store/classes";
 import { Modal } from "../CreateCategoryModal";
 import CustomButton from "../Button/Button";
+import { deleteClass } from "../../store/classes";
 
 function ClassPage() {
   const dispatch = useDispatch();
   const ClassList = useSelector((state) => state?.classes?.class || []);
+  const errorMessage = useSelector((state) => state?.classes?.errorMessage || "");
   const [className, setClassName] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  
+  const [selectedClass, setSelectedClass] = useState(null);
+
   useEffect(() => {
     dispatch(listClass());
   }, []);
@@ -21,9 +24,20 @@ function ClassPage() {
     setClassName("");
   };
 
+  const onUpdateClass = (cl) => {
+    setSelectedClass(cl);
+    setClassName(cl?.name);
+    setOpenModal(true);
+  };
+
   const callCreateClass = () => {
     dispatch(createClass(className, callBack));
   };
+
+  const deleteClasses = async(cl) => {
+    await dispatch(deleteClass(cl?.id)); //.then(() => history.push('/songs'))
+  };
+
 
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
@@ -40,33 +54,17 @@ function ClassPage() {
           paddingRight: 40,
         }}
       >
-        {/* <button
-          name="create-class"
-          style={{
-            width: 240,
-            height: 34,
-            backgroundColor: "#36013F",
-            color: "white",
-            border: "none",
-            fontWeight: 800,
-            cursor: "pointer",
-          }}
-          onClick={() => setOpenModal(true)}
-        >
-          Create Class
-        </button> */}
-        
-        
+    
         <CustomButton
           variant="submit"
           title="Create Class"
           onClick={() => setOpenModal(true)}
         ></CustomButton>
-
-
-
-
       </div>
+      
+      {/* A class with decks cannot be deleted! */}
+      <p style={{color: "red"}}>{errorMessage}</p>
+
       {openModal && (
         <div
           style={{
@@ -79,62 +77,71 @@ function ClassPage() {
             flexDirection: "column",
           }}
         >
-          <h2 className="title">Create Class</h2>
+          <h2 className="title">
+            {`${selectedClass !== null ? "Update" : "Create"}`} Class
+          </h2>
           <input
             type="text"
             placeholder="Enter class name"
+            defaultValue={className}
             style={{
               height: 32,
               minWidth: 390,
               borderRadius: 8,
               marginTop: 20,
               padding: 8,
-              marginBottom: 8
+              marginBottom: 8,
             }}
             onChange={(e) => setClassName(e.target.value)}
           />
-          {/* <button
-            name="create-class"
-            style={{
-              width: 240,
-              marginTop: 40,
-              height: 34,
-              backgroundColor: "#36013F",
-              color: "white",
-              border: "none",
-              fontWeight: 800,
-              cursor: "pointer",
-            }}
-            onClick={() => callCreateClass()}
-          >
-            Create
-          </button> */}
 
-          <div style={{display: "flex", gap: "20", marginTop: "40"}}>
-          <CustomButton
-            variant="submit"
-            title="Submit"
-            disabled={className?.length === 0 }
-            onClick={() => callCreateClass()}
-          ></CustomButton>
+          <div style={{ display: "flex", gap: "20", marginTop: "40" }}>
+            <CustomButton
+              variant="submit"
+              title="Submit"
+              disabled={className?.length === 0}
+              onClick={() => callCreateClass()}
+            ></CustomButton>
 
-          <CustomButton
-            variant="cancel"
-            title="Cancel"
-            onClick={() => setOpenModal(false)}
-          ></CustomButton>
+            <CustomButton
+              variant="cancel"
+              title="Cancel"
+              onClick={() => setOpenModal(false)}
+            ></CustomButton>
           </div>
         </div>
       )}
-      <ul>
+      <div style={{ padding: 10 }}></div>
+      <ol>
         {ClassList?.map((cl) => (
-          <li key={cl.id}>
+          <li
+            key={cl.id}
+            style={{
+              color: "#f8f4f4",
+              fontSize: 34,
+              fontWeight: 600,
+              padding: 5,
+            }}
+          >
             <a className="link" href={`/class/${cl?.id}`}>
               {cl?.name}
             </a>
+            <div style={{ display: "flex" }}>
+              <CustomButton
+                variant="submit"
+                title="Update Class"
+                onClick={() => onUpdateClass(cl)}
+              ></CustomButton>
+              <CustomButton
+                variant="delete"
+                title="Delete Class"
+                onClick={() => deleteClasses(cl)}
+              ></CustomButton>
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
+      <div />
     </>
   );
 }

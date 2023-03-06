@@ -122,17 +122,6 @@ function CardPage() {
           <h2 className="title">
             {`${selectedCard !== null ? "Update" : "Create"}`} Card
           </h2>
-          {/* <input
-            type="text"
-            placeholder="Enter card name"
-            style={{
-              height: 32,
-              minWidth: 250,
-              borderRadius: 8,
-              marginTop: 20,
-            }}
-            onChange={(e) => setCardQuestion(e.target.value)}
-          /> */}
           <input
             type="text"
             placeholder="Enter card question"
@@ -205,11 +194,11 @@ function CardPage() {
       <div style={{ padding: 40 }}>
         <ol>
           {CardList?.map((card) => (
-            <li
+            <div
               key={card?.id}
-              style={{ color: "#f8f4f4", fontSize: 34, fontWeight: 600 }}
+              style={{ color: "#f8f4f4", fontSize: 34, fontWeight: 600, display: "flex", justifyContent: "space-between"}}
             >
-              {card?.card_question}
+              <li>{card?.card_question}</li>
 
             <div style={{display: "flex"}}>
               <CustomButton
@@ -223,7 +212,7 @@ function CardPage() {
                 onClick={() => deleteCard(card)}
               ></CustomButton>
               </div>
-            </li>
+            </div>
           ))}
         </ol>
       </div>

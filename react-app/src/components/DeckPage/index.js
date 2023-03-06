@@ -30,7 +30,7 @@ function DeckPage() {
 
   return (
     <>
-      <h1 className="title">Decks</h1>
+      <h1 className="title">List of Decks</h1>
       {/* * To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
        * To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
       <div
@@ -110,15 +110,31 @@ function DeckPage() {
         
         </div>
       )}
-      <ul>
+      <div style={{ padding: 20 }}>
+      <ol>
         {DeckList?.map((deck) => (
-          <li key={deck?.id}>
+          <li key={deck?.id}
+          style={{ color: "#f8f4f4", fontSize: 34, fontWeight: 600, padding: 5 }}
+          >
             <a className="link" href={`/deck/${deck?.id}`}>
               {deck?.name}
             </a>
+            <div style={{display: "flex"}}>
+              <CustomButton
+                variant="submit"
+                title="Update Deck"
+                //onClick={() => onUpdateCard(card)}
+              ></CustomButton>
+              <CustomButton
+                variant="delete"
+                title="Delete Deck"
+                //onClick={() => deleteCard(card)}
+              ></CustomButton>
+              </div>
           </li>
         ))}
-      </ul>
+      </ol>
+      </div>
     </>
   );
 }
