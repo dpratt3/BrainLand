@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createCard, listCardByDeckId, updateCard } from "../../store/cards";
 import CustomButton from "../Button/Button";
+import { deleteCardByCardId } from "../../store/cards";
 
 function CardPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function CardPage() {
 
   const [selectedCard, setSelectedCard] = useState(null);
 
+  console.log(CardList[selectedCard?.id])
   useEffect(() => {
     //  do list of card by deckId
     dispatch(listCardByDeckId(deckId));
@@ -31,6 +33,11 @@ function CardPage() {
   const callCreateCard = () => {
     dispatch(createCard(cardQuestion, cardAnswer, deckId, callBack));
   };
+
+  const deleteCard = async(card) => {
+    await dispatch(deleteCardByCardId(card?.id)); //.then(() => history.push('/songs'))
+  };
+
 
   const callUpdateCard = () => {
     const card = {
@@ -204,11 +211,18 @@ function CardPage() {
             >
               {card?.card_question}
 
+            <div style={{display: "flex"}}>
               <CustomButton
                 variant="submit"
-                title="Edit Card"
+                title="Update Card"
                 onClick={() => onUpdateCard(card)}
               ></CustomButton>
+              <CustomButton
+                variant="delete"
+                title="Delete Card"
+                onClick={() => deleteCard(card)}
+              ></CustomButton>
+              </div>
             </li>
           ))}
         </ol>

@@ -34,9 +34,9 @@ function PlayDeck() {
     setShowAnswer(false);
   };
 
-  const deleteCard = async (card) => {
-    await dispatch(deleteCardByCardId(card?.id)); //.then(() => history.push('/songs'))
-  };
+  // const deleteCard = async (card) => {
+  //   await dispatch(deleteCardByCardId(card?.id)); //.then(() => history.push('/songs'))
+  // };
 
   return (
     <div style={{ display: "flex", width: "100%", height: "100vh" }}>
@@ -118,11 +118,11 @@ function PlayDeck() {
                 disabled={currentQuestionIndex === CardList?.length}
               ></CustomButton>
 
-              <CustomButton
+              {/* <CustomButton
                 variant="delete"
                 title="Delete Card"
                 onClick={() => deleteCard(CardList[currentQuestionIndex])}
-              ></CustomButton>
+              ></CustomButton> */}
 
               {/* <button
                 className="fancyButton"
