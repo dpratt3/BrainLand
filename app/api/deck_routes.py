@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Deck, Class
+from app.models import User, db, Deck, Class, Progress
 from flask_login import current_user, login_user, logout_user, login_required
+
+from app.models.brainLand import Card
 
 deck_routes = Blueprint('deck', __name__)
 
@@ -92,19 +94,31 @@ def delete_deck_by_id(id):
         deck_obj = Deck.query.get(id)
         
         if not deck_obj: 
-            return "Deck not found", 404 # 401 is unathorized
+            return {"message":  "Deck not found"}, 404 # 401 is unathorized
         
         # Make sure that the user owns the deck in question
         class_id = deck_obj.class_id
         class_obj = Class.query.get(class_id)
         
         if(current_user.id != class_obj.user_id):
-            return "User does not own class which owns deck", 401
-                   
+            return {"message":  "User does not own class which owns deck"}, 401
+    
+        list_of_cards = Card.query.filter(Card.deck_id == deck_obj.id).all()
+        
+        if len(list_of_cards) > 0:
+            return {"message": "All cards must be deleted before a deck is deleted"}, 409
+        
+        # list_of_progress_record = Progress.query.filter(Progress.deck_id == deck_obj.id).all()
+        
+        # if len(list_of_progress_record) > 0:
+        #     return {"message": "Progress records are linked with this deck"}, 409
+        
+                           
         try: 
             db.session.delete(deck_obj)
             db.session.commit()
-        except:
-            return "Deck cannot be deleted"
+        except Exception as e:
+            print(e)
+            return {"message": "Deck cannot be deleted"}, 500
         
     return "Deck successfully deleted"

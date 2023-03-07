@@ -10,6 +10,7 @@ function DeckPage() {
   const dispatch = useDispatch();
   const { classId } = useParams(); // retrieve class_id from url since one is routed here after clicking on class name
   const DeckList = useSelector((state) => state.decks.deck);
+  const errorMessage = useSelector((state) => state?.classes?.errorMessage || "");
   const [deckName, setDeckName] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
@@ -52,6 +53,9 @@ function DeckPage() {
           onClick={() => setOpenModal(true)}
         ></CustomButton>
       </div>
+
+      <p style={{color: "red"}}>{errorMessage}</p>
+
       {openModal && (
         <div
           style={{

@@ -3,6 +3,7 @@ const SET_DECK = "deck/SET_DECk";
 const CREATE_DECK = "class/CREATE_DECK";
 const EDIT_DECK = "class/EDIT_DECK";
 const DELETE_DECK = "class/DELETE_DECK";
+const SET_ERROR = "class/SET_ERROR";
 
 const setDecks = (decks) => ({
   type: SET_DECK,
@@ -22,6 +23,11 @@ const editDecks = (decks) => ({
 const deleteDecks = (decks) => ({
   type: DELETE_DECK,
   payload: decks,
+});
+
+const setError = (errorMessage) => ({
+  type: SET_ERROR,
+  payload: errorMessage,
 });
 
 const initialState = { deck: null };
@@ -99,8 +105,13 @@ export const deleteDeckByDeckId = (deckId) => async (dispatch) => {
     method: "DELETE",
   };
   const response = await fetch(`/api/deck/${deckId}`, options);
-  dispatch(deleteDecks(deckId));
-  return response;
+  
+  if (response.ok) {
+    dispatch(deleteDecks(deckId));
+  } else {
+    const error = await response.json();
+    dispatch(setError(error?.message));
+  }
 };
 
 export default function reducer(state = initialState, action) {
@@ -122,7 +133,10 @@ export default function reducer(state = initialState, action) {
       const newState = { ...state };
       const deckId = action.payload;
       let decks = newState?.deck;
-      return { decks: decks.filter((deck) => deck?.id !== deckId) };
+      return { deck: decks.filter((deck) => deck?.id !== deckId) };
+    }
+    case SET_ERROR: {
+      return { ...state, errorMessage: action?.payload };
     }
     default:
       return state;
