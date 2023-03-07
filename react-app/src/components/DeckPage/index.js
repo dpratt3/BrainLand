@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { listDeckByClassId, createDeck } from "../../store/decks";
+import { listDeckByClassId, createDeck, updateDeck } from "../../store/decks";
 import CustomButton from "../Button/Button";
 import { Modal } from "../CreateCategoryModal";
 import { deleteDeckByDeckId } from "../../store/decks";
@@ -9,26 +9,49 @@ import { deleteDeckByDeckId } from "../../store/decks";
 function DeckPage() {
   const dispatch = useDispatch();
   const { classId } = useParams(); // retrieve class_id from url since one is routed here after clicking on class name
-  const DeckList = useSelector((state) => state.decks.deck);
+  const DeckList = useSelector((state) => state?.decks?.deck);
   const errorMessage = useSelector((state) => state?.classes?.errorMessage || "");
   const [deckName, setDeckName] = useState("");
   const [openModal, setOpenModal] = useState(false);
-
-  const callBack = () => {
-    setOpenModal(false);
-    setDeckName("");
-  };
+  const [selectedDeck, setSelectedDeck] = useState(null);
 
   useEffect(() => {
     dispatch(listDeckByClassId(Number(classId)));
   }, []);
 
+  const callBack = () => {
+    setSelectedDeck(null);
+    setOpenModal(false);
+    setDeckName("");
+  };
+
+  const onUpdateDeck = (deck) => {
+    setSelectedDeck(deck);
+    setDeckName(deck?.name);
+    setOpenModal(true);
+  };
+
+  const openCreateDeckModal = () => {
+    setSelectedDeck(null);
+    setDeckName("");
+    setOpenModal(true);
+  };
+
+  const callUpdateDeck = () => {
+    const deck = {
+      id: selectedDeck?.id,
+      class_id: selectedDeck?.class_id,
+      name: deckName
+    };
+    dispatch(updateDeck(deck, callBack));
+  };
+
   const callCreateDeck = () => {
     dispatch(createDeck(deckName, classId, callBack));
   };
 
-  const deleteDeck = async(deck) => {
-    await dispatch(deleteDeckByDeckId(deck?.id)); //.then(() => history.push('/songs'))
+  const deleteDeck = (deck) => {
+    dispatch(deleteDeckByDeckId(deck?.id));
   };
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -50,7 +73,7 @@ function DeckPage() {
         <CustomButton
           variant="submit"
           title="Create Deck"
-          onClick={() => setOpenModal(true)}
+          onClick={() => openCreateDeckModal()}
         ></CustomButton>
       </div>
 
@@ -68,10 +91,11 @@ function DeckPage() {
             flexDirection: "column",
           }}
         >
-          <h2 className="title">Create Deck</h2>
+          <h2 className="title">{`${selectedDeck !== null ? "Update" : "Create"}`} Deck</h2>
           <input
             type="text"
             placeholder="Enter deck name"
+            defaultValue={deckName}
             style={{
               height: 32,
               minWidth: 400,
@@ -81,34 +105,25 @@ function DeckPage() {
             }}
             onChange={(e) => setDeckName(e.target.value)}
           />
-          {/* <button
-            name="create-class"
-            style={{
-              width: 240,
-              marginTop: 40,
-              height: 34,
-              backgroundColor: "#36013F",
-              color: "white",
-              border: "none",
-              fontWeight: 800,
-              cursor: "pointer",
-            }}
-            onClick={() => callCreateDeck()}
-          >
-            Create
-          </button> */}
-          {/* <CustomButton
-            variant="submit"
-            title="Submit"
-            onClick={() => setOpenModal(true)}
-          ></CustomButton> */}
 
         <div style={{display: "flex", gap: "20", marginTop: "40"}}>
-          <CustomButton
-            variant="submit"
-            title="Submit"
-            onClick={() => callCreateDeck()}
-          ></CustomButton>
+   
+
+{!selectedDeck && (
+              <CustomButton
+                variant="submit"
+                title="Submit"
+                onClick={() => callCreateDeck()}
+              ></CustomButton>
+            )}
+
+{selectedDeck && (
+              <CustomButton
+                variant="submit"
+                title="Update"
+                onClick={() => callUpdateDeck()}
+              ></CustomButton>
+            )}
 
           <CustomButton
             variant="cancel"
@@ -132,7 +147,7 @@ function DeckPage() {
               <CustomButton
                 variant="submit"
                 title="Update Deck"
-                //onClick={() => onUpdateCard(card)}
+                onClick={() => onUpdateDeck(deck)}
               ></CustomButton>
               <CustomButton
                 variant="delete"

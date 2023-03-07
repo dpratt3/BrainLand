@@ -82,13 +82,13 @@ export const listDeckByClassId = (class_id) => async (dispatch) => {
   }
 };
 
-export const editDeck = (decks, deckId) => async (dispatch) => {
-  const response = await fetch(`/api/deck/${deckId}`, {
+export const updateDeck = (deck, callBack) => async (dispatch) => {
+  const response = await fetch(`/api/deck/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(decks),
+    body: JSON.stringify(deck),
   });
 
   if (response.ok) {
@@ -96,9 +96,11 @@ export const editDeck = (decks, deckId) => async (dispatch) => {
     if (data.errors) {
       return;
     }
+
     dispatch(editDecks(data));
+    callBack();
   }
-};
+}
 
 export const deleteDeckByDeckId = (deckId) => async (dispatch) => {
   const options = {
@@ -125,9 +127,14 @@ export default function reducer(state = initialState, action) {
       return { deck: action.payload };
     }
     case EDIT_DECK: {
-      const newState = { ...state };
-      newState[action.decks.id] = action.classes;
-      return newState;
+        let decks = state.deck?.map(d => {
+          if(d?.id === action?.payload?.id){
+            return action?.payload;
+          }
+          return d;
+        })
+        return { ...state, ...{ deck: decks } };
+
     }
     case DELETE_DECK: {
       const newState = { ...state };

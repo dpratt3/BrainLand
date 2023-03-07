@@ -20,43 +20,22 @@ def get_all_decks():
     return all_decks
 
 ### Edit a deck name for a class that they own
-@deck_routes.route('/<int:id>', methods = ["PUT"])
-def edit_deck_name(id):
+@deck_routes.route('/', methods = ["PUT"])
+def edit_deck_name():
     if current_user.is_authenticated:
-        deck_obj = Deck.query.get(id)
+        updated_deck = request.json
+        
+        deck_obj = Deck.query.get(updated_deck['id'])
         if not deck_obj:
             return "Deck does not exist (yet)", 404
         
-        data = request.json
+        deck_obj.name = updated_deck['name']
         
-        # User must own the class that owns the deck
-        class_id = deck_obj.class_id
-        class_obj = Class.query.get(class_id)
-         
-        if class_obj.user_id != current_user.id:
-            return "User does not own class", 401
-        
-        # block user from being allowed to assign decks to classes they don't own
-        id = current_user.id
-        owned_classes = Class.query.filter(Class.user_id == id).all()
-        owned_class_ids = [class_var.user_id for class_var in owned_classes]
-        if data['class_id'] not in owned_class_ids:
-            return "User cannot assign deck to class that they don't own"
-        
-        # change name of deck and class id
-        deck_obj.name = data['name']
-        deck_obj.class_id = data['class_id']
-                
         db.session.add(deck_obj)
         db.session.commit()
         
-        result = {
-            "id": deck_obj.id,
-            "name": deck_obj.name,
-            "class_id": deck_obj.class_id
-        }
     
-    return result
+    return deck_obj.to_dict()
 
 ### Create a deck for a class that they made
 @deck_routes.route('/', methods = ["POST"])

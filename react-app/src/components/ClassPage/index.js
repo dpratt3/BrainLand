@@ -34,8 +34,8 @@ function ClassPage() {
     dispatch(createClass(className, callBack));
   };
 
-  const deleteClasses = async(cl) => {
-    await dispatch(deleteClass(cl?.id)); //.then(() => history.push('/songs'))
+  const deleteClasses = (cl) => {
+    dispatch(deleteClass(cl?.id)); 
   };
 
 
