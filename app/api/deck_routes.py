@@ -86,8 +86,9 @@ def create_decks():
 
 ### Delete a deck from a class that they own
 @deck_routes.route('/<int:id>', methods = ["DELETE"])
-def delete_class_by_id(id):
+def delete_deck_by_id(id):
     if current_user.is_authenticated:
+        
         deck_obj = Deck.query.get(id)
         
         if not deck_obj: 

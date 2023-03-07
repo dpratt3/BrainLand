@@ -94,18 +94,13 @@ export const editDeck = (decks, deckId) => async (dispatch) => {
   }
 };
 
-export const deleteDeck = (decks, deckId) => async (dispatch) => {
-  const response = await fetch(`/api/deck/${deckId}`, {
+export const deleteDeckByDeckId = (deckId) => async (dispatch) => {
+  const options = {
     method: "DELETE",
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-    dispatch(deleteDecks(data));
-  }
+  };
+  const response = await fetch(`/api/deck/${deckId}`, options);
+  dispatch(deleteDecks(deckId));
+  return response;
 };
 
 export default function reducer(state = initialState, action) {
@@ -125,8 +120,9 @@ export default function reducer(state = initialState, action) {
     }
     case DELETE_DECK: {
       const newState = { ...state };
-      delete newState[action.decks.id];
-      return newState;
+      const deckId = action.payload;
+      let decks = newState?.deck;
+      return { decks: decks.filter((deck) => deck?.id !== deckId) };
     }
     default:
       return state;

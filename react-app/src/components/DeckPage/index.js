@@ -4,6 +4,7 @@ import { Redirect, useParams } from "react-router-dom";
 import { listDeckByClassId, createDeck } from "../../store/decks";
 import CustomButton from "../Button/Button";
 import { Modal } from "../CreateCategoryModal";
+import { deleteDeckByDeckId } from "../../store/decks";
 
 function DeckPage() {
   const dispatch = useDispatch();
@@ -23,6 +24,10 @@ function DeckPage() {
 
   const callCreateDeck = () => {
     dispatch(createDeck(deckName, classId, callBack));
+  };
+
+  const deleteDeck = async(deck) => {
+    await dispatch(deleteDeckByDeckId(deck?.id)); //.then(() => history.push('/songs'))
   };
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -128,7 +133,7 @@ function DeckPage() {
               <CustomButton
                 variant="delete"
                 title="Delete Deck"
-                //onClick={() => deleteCard(card)}
+                onClick={() => deleteDeck(deck)}
               ></CustomButton>
               </div>
           </li>
