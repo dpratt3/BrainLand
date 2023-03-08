@@ -39,6 +39,34 @@ def create_classes():
     
     return result
 
+
+# update class
+@class_routes.route('/', methods = ["PUT"])
+def update_class():
+    print(current_user.is_authenticated)
+    # if current_user.is_authenticated:
+    updated_class = request.json
+    
+    class_obj = Class.query.get(updated_class['id'])
+    if not class_obj:
+        return {"message":  "Class does not exist (yet)"}, 401
+
+    # User must own the class that owns the deck
+        
+    # if class_obj.user_id != current_user.id:
+    #     return {"message":  "User does not own class"}, 401
+
+    class_obj.name = updated_class['name']
+    
+    db.session.add(class_obj)
+    db.session.commit()
+    
+    print(class_obj.to_dict())
+
+    return class_obj.to_dict()
+    # else:
+        # return {"message":  "User is not authenticated"}, 401
+
 ## delete a class
 @class_routes.route('/<int:id>', methods = ["DELETE"])
 def delete_class_by_id(id):

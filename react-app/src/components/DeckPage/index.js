@@ -10,7 +10,9 @@ function DeckPage() {
   const dispatch = useDispatch();
   const { classId } = useParams(); // retrieve class_id from url since one is routed here after clicking on class name
   const DeckList = useSelector((state) => state?.decks?.deck);
-  const errorMessage = useSelector((state) => state?.classes?.errorMessage || "");
+  const errorMessage = useSelector(
+    (state) => state?.classes?.errorMessage || ""
+  );
   const [deckName, setDeckName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [selectedDeck, setSelectedDeck] = useState(null);
@@ -41,7 +43,7 @@ function DeckPage() {
     const deck = {
       id: selectedDeck?.id,
       class_id: selectedDeck?.class_id,
-      name: deckName
+      name: deckName,
     };
     dispatch(updateDeck(deck, callBack));
   };
@@ -77,7 +79,7 @@ function DeckPage() {
         ></CustomButton>
       </div>
 
-      <p style={{color: "red"}}>{errorMessage}</p>
+      <p style={{ color: "red" }}>{errorMessage}</p>
 
       {openModal && (
         <div
@@ -91,7 +93,9 @@ function DeckPage() {
             flexDirection: "column",
           }}
         >
-          <h2 className="title">{`${selectedDeck !== null ? "Update" : "Create"}`} Deck</h2>
+          <h2 className="title">
+            {`${selectedDeck !== null ? "Update" : "Create"}`} Deck
+          </h2>
           <input
             type="text"
             placeholder="Enter deck name"
@@ -101,15 +105,13 @@ function DeckPage() {
               minWidth: 400,
               borderRadius: 8,
               marginTop: 20,
-              marginBottom: 8
+              marginBottom: 8,
             }}
             onChange={(e) => setDeckName(e.target.value)}
           />
 
-        <div style={{display: "flex", gap: "20", marginTop: "40"}}>
-   
-
-{!selectedDeck && (
+          <div style={{ display: "flex", gap: "20", marginTop: "40" }}>
+            {!selectedDeck && (
               <CustomButton
                 variant="submit"
                 title="Submit"
@@ -117,7 +119,7 @@ function DeckPage() {
               ></CustomButton>
             )}
 
-{selectedDeck && (
+            {selectedDeck && (
               <CustomButton
                 variant="submit"
                 title="Update"
@@ -125,39 +127,44 @@ function DeckPage() {
               ></CustomButton>
             )}
 
-          <CustomButton
-            variant="cancel"
-            title="Cancel"
-            onClick={() => setOpenModal(false)}
-          ></CustomButton>
+            <CustomButton
+              variant="cancel"
+              title="Cancel"
+              onClick={() => setOpenModal(false)}
+            ></CustomButton>
           </div>
-        
         </div>
       )}
       <div style={{ padding: 20 }}>
-      <ol>
-        {DeckList?.map((deck) => (
-          <li key={deck?.id}
-          style={{ color: "#f8f4f4", fontSize: 34, fontWeight: 600, padding: 5 }}
-          >
-            <a className="link" href={`/deck/${deck?.id}`}>
-              {deck?.name}
-            </a>
-            <div style={{display: "flex"}}>
-              <CustomButton
-                variant="submit"
-                title="Update Deck"
-                onClick={() => onUpdateDeck(deck)}
-              ></CustomButton>
-              <CustomButton
-                variant="delete"
-                title="Delete Deck"
-                onClick={() => deleteDeck(deck)}
-              ></CustomButton>
+        <ol>
+          {DeckList?.map((deck) => (
+            <li
+              key={deck?.id}
+              style={{
+                color: "#f8f4f4",
+                fontSize: 34,
+                fontWeight: 600,
+                padding: 5,
+              }}
+            >
+              <a className="link" href={`/deck/${deck?.id}`}>
+                {deck?.name}
+              </a>
+              <div style={{ display: "flex" }}>
+                <CustomButton
+                  variant="submit"
+                  title="Update Deck"
+                  onClick={() => onUpdateDeck(deck)}
+                ></CustomButton>
+                <CustomButton
+                  variant="delete"
+                  title="Delete Deck"
+                  onClick={() => deleteDeck(deck)}
+                ></CustomButton>
               </div>
-          </li>
-        ))}
-      </ol>
+            </li>
+          ))}
+        </ol>
       </div>
     </>
   );

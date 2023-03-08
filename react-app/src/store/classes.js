@@ -69,23 +69,25 @@ export const createClass = (className, callBack) => async (dispatch) => {
   }
 };
 
-export const editClass = (classes, classId) => async (dispatch) => {
+export const editClass = (updatedClass, callback) => async (dispatch) => {
   dispatch(setError(""));
-  const response = await fetch(`/api/class/${classId}`, {
+
+  const response = await fetch(`/api/class`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(classes),
+    body: JSON.stringify(updatedClass),
   });
 
   if (response.ok) {
     const data = await response.json();
-    if (data.errors) {
-      return;
-    }
     dispatch(editClasses(data));
+  } else {
+    const error = await response.json();
+    dispatch(setError(error?.message));
   }
+  callback();
 };
 
 export const deleteClass = (classId) => async (dispatch) => {
@@ -113,9 +115,13 @@ export default function reducer(state = initialState, action) {
       return { class: action.payload };
     }
     case EDIT_CLASS: {
-      const newState = { ...state };
-      newState[action.classes.id] = action.classes;
-      return newState;
+      let classes = state.class?.map((cl) => {
+        if (cl?.id === action?.payload?.id) {
+          return action?.payload;
+        }
+        return cl;
+      });
+      return { ...state, ...{ class: classes } };
     }
     case DELETE_CLASS: {
       const newState = { ...state };

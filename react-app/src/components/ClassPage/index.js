@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
-import { createClass, listClass } from "../../store/classes";
+import { createClass, listClass, editClass } from "../../store/classes";
 import { Modal } from "../CreateCategoryModal";
 import CustomButton from "../Button/Button";
 import { deleteClass } from "../../store/classes";
@@ -10,7 +10,9 @@ import { deleteClass } from "../../store/classes";
 function ClassPage() {
   const dispatch = useDispatch();
   const ClassList = useSelector((state) => state?.classes?.class || []);
-  const errorMessage = useSelector((state) => state?.classes?.errorMessage || "");
+  const errorMessage = useSelector(
+    (state) => state?.classes?.errorMessage || ""
+  );
   const [className, setClassName] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -24,9 +26,24 @@ function ClassPage() {
     setClassName("");
   };
 
+  const callUpdateClass = () => {
+    const updatedClass = {
+      id: selectedClass?.id,
+      name: className,
+      user_id: selectedClass?.user_id,
+    };
+    dispatch(editClass(updatedClass, callBack));
+  };
+
   const onUpdateClass = (cl) => {
     setSelectedClass(cl);
     setClassName(cl?.name);
+    setOpenModal(true);
+  };
+
+  const openCreateClassModal = () => {
+    setSelectedClass(null);
+    setClassName("");
     setOpenModal(true);
   };
 
@@ -35,9 +52,8 @@ function ClassPage() {
   };
 
   const deleteClasses = (cl) => {
-    dispatch(deleteClass(cl?.id)); 
+    dispatch(deleteClass(cl?.id));
   };
-
 
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/login" />;
@@ -54,16 +70,15 @@ function ClassPage() {
           paddingRight: 40,
         }}
       >
-    
         <CustomButton
           variant="submit"
           title="Create Class"
-          onClick={() => setOpenModal(true)}
+          onClick={() => openCreateClassModal()}
         ></CustomButton>
       </div>
-      
+
       {/* A class with decks cannot be deleted! */}
-      <p style={{color: "red"}}>{errorMessage}</p>
+      <p style={{ color: "red" }}>{errorMessage}</p>
 
       {openModal && (
         <div
@@ -96,12 +111,21 @@ function ClassPage() {
           />
 
           <div style={{ display: "flex", gap: "20", marginTop: "40" }}>
-            <CustomButton
-              variant="submit"
-              title="Submit"
-              disabled={className?.length === 0}
-              onClick={() => callCreateClass()}
-            ></CustomButton>
+            {selectedClass !== null ? (
+              <CustomButton
+                variant="submit"
+                title="Update"
+                disabled={className?.length === 0}
+                onClick={() => callUpdateClass()}
+              ></CustomButton>
+            ) : (
+              <CustomButton
+                variant="submit"
+                title="Submit"
+                disabled={className?.length === 0}
+                onClick={() => callCreateClass()}
+              ></CustomButton>
+            )}
 
             <CustomButton
               variant="cancel"
