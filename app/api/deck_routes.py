@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Deck, Class
+from app.models import User, db, Deck, Class, Progress
 from flask_login import current_user, login_user, logout_user, login_required
+
+from app.models.brainLand import Card
 
 deck_routes = Blueprint('deck', __name__)
 
@@ -18,43 +20,22 @@ def get_all_decks():
     return all_decks
 
 ### Edit a deck name for a class that they own
-@deck_routes.route('/<int:id>', methods = ["PUT"])
-def edit_deck_name(id):
+@deck_routes.route('/', methods = ["PUT"])
+def edit_deck_name():
     if current_user.is_authenticated:
-        deck_obj = Deck.query.get(id)
+        updated_deck = request.json
+        
+        deck_obj = Deck.query.get(updated_deck['id'])
         if not deck_obj:
             return "Deck does not exist (yet)", 404
         
-        data = request.json
+        deck_obj.name = updated_deck['name']
         
-        # User must own the class that owns the deck
-        class_id = deck_obj.class_id
-        class_obj = Class.query.get(class_id)
-         
-        if class_obj.user_id != current_user.id:
-            return "User does not own class", 401
-        
-        # block user from being allowed to assign decks to classes they don't own
-        id = current_user.id
-        owned_classes = Class.query.filter(Class.user_id == id).all()
-        owned_class_ids = [class_var.user_id for class_var in owned_classes]
-        if data['class_id'] not in owned_class_ids:
-            return "User cannot assign deck to class that they don't own"
-        
-        # change name of deck and class id
-        deck_obj.name = data['name']
-        deck_obj.class_id = data['class_id']
-                
         db.session.add(deck_obj)
         db.session.commit()
         
-        result = {
-            "id": deck_obj.id,
-            "name": deck_obj.name,
-            "class_id": deck_obj.class_id
-        }
     
-    return result
+    return deck_obj.to_dict()
 
 ### Create a deck for a class that they made
 @deck_routes.route('/', methods = ["POST"])
@@ -92,19 +73,31 @@ def delete_deck_by_id(id):
         deck_obj = Deck.query.get(id)
         
         if not deck_obj: 
-            return "Deck not found", 404 # 401 is unathorized
+            return {"message":  "Deck not found"}, 404 # 401 is unathorized
         
         # Make sure that the user owns the deck in question
         class_id = deck_obj.class_id
         class_obj = Class.query.get(class_id)
         
         if(current_user.id != class_obj.user_id):
-            return "User does not own class which owns deck", 401
-                   
+            return {"message":  "User does not own class which owns deck"}, 401
+    
+        list_of_cards = Card.query.filter(Card.deck_id == deck_obj.id).all()
+        
+        if len(list_of_cards) > 0:
+            return {"message": "All cards must be deleted before a deck is deleted"}, 409
+        
+        # list_of_progress_record = Progress.query.filter(Progress.deck_id == deck_obj.id).all()
+        
+        # if len(list_of_progress_record) > 0:
+        #     return {"message": "Progress records are linked with this deck"}, 409
+        
+                           
         try: 
             db.session.delete(deck_obj)
             db.session.commit()
-        except:
-            return "Deck cannot be deleted"
+        except Exception as e:
+            print(e)
+            return {"message": "Deck cannot be deleted"}, 500
         
     return "Deck successfully deleted"

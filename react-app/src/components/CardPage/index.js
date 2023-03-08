@@ -78,13 +78,6 @@ function CardPage() {
         <h1 className="title">List of Cards</h1>
 
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          {/* <button
-            className="fancyButton"
-            name="create-card"
-            onClick={() => setOpenModal(true)}
-          >
-            Create Card
-          </button> */}
           <CustomButton
             variant="submit"
             title="Create Card"
@@ -95,9 +88,6 @@ function CardPage() {
             href={`/play/${deckId}`}
             style={{ textDecoration: "none" }}
           >
-            {/* <button class="fancyButton" disabled={CardList?.length === 0}>
-              Play Deck
-            </button> */}
             <CustomButton
               variant="submit"
               title="Play Deck"

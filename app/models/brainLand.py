@@ -108,11 +108,11 @@ class Progress(db.Model):
     
     if environment == "production":
         __table_args__ = (db.UniqueConstraint(
-            'user_id', 'deck_id', 'progress_score'), {'schema': SCHEMA})
+            'user_id', 'progress_score'), {'schema': SCHEMA})
         
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    deck_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('deck.id')), nullable=False)
+    deck_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('deck.id')), nullable=True)
     progress_score = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):

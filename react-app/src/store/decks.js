@@ -3,6 +3,7 @@ const SET_DECK = "deck/SET_DECk";
 const CREATE_DECK = "class/CREATE_DECK";
 const EDIT_DECK = "class/EDIT_DECK";
 const DELETE_DECK = "class/DELETE_DECK";
+const SET_ERROR = "class/SET_ERROR";
 
 const setDecks = (decks) => ({
   type: SET_DECK,
@@ -22,6 +23,11 @@ const editDecks = (decks) => ({
 const deleteDecks = (decks) => ({
   type: DELETE_DECK,
   payload: decks,
+});
+
+const setError = (errorMessage) => ({
+  type: SET_ERROR,
+  payload: errorMessage,
 });
 
 const initialState = { deck: null };
@@ -76,13 +82,13 @@ export const listDeckByClassId = (class_id) => async (dispatch) => {
   }
 };
 
-export const editDeck = (decks, deckId) => async (dispatch) => {
-  const response = await fetch(`/api/deck/${deckId}`, {
+export const updateDeck = (deck, callBack) => async (dispatch) => {
+  const response = await fetch(`/api/deck/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(decks),
+    body: JSON.stringify(deck),
   });
 
   if (response.ok) {
@@ -90,17 +96,24 @@ export const editDeck = (decks, deckId) => async (dispatch) => {
     if (data.errors) {
       return;
     }
+
     dispatch(editDecks(data));
+    callBack();
   }
-};
+}
 
 export const deleteDeckByDeckId = (deckId) => async (dispatch) => {
   const options = {
     method: "DELETE",
   };
   const response = await fetch(`/api/deck/${deckId}`, options);
-  dispatch(deleteDecks(deckId));
-  return response;
+  
+  if (response.ok) {
+    dispatch(deleteDecks(deckId));
+  } else {
+    const error = await response.json();
+    dispatch(setError(error?.message));
+  }
 };
 
 export default function reducer(state = initialState, action) {
@@ -114,15 +127,23 @@ export default function reducer(state = initialState, action) {
       return { deck: action.payload };
     }
     case EDIT_DECK: {
-      const newState = { ...state };
-      newState[action.decks.id] = action.classes;
-      return newState;
+        let decks = state.deck?.map(d => {
+          if(d?.id === action?.payload?.id){
+            return action?.payload;
+          }
+          return d;
+        })
+        return { ...state, ...{ deck: decks } };
+
     }
     case DELETE_DECK: {
       const newState = { ...state };
       const deckId = action.payload;
       let decks = newState?.deck;
-      return { decks: decks.filter((deck) => deck?.id !== deckId) };
+      return { deck: decks.filter((deck) => deck?.id !== deckId) };
+    }
+    case SET_ERROR: {
+      return { ...state, errorMessage: action?.payload };
     }
     default:
       return state;
