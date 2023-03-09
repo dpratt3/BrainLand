@@ -60,14 +60,22 @@ function ClassPage() {
 
   return (
     <>
-      <h1 className="title">List of Classes</h1>
       <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: 20,
+          alignItems: "center",
+        }}
+      >
+        <h1 className="title">List of Classes</h1>
+        {/* <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           paddingRight: 40,
         }}
-      >
+      > */}
         <CustomButton
           variant="submit"
           title="Create Class"
@@ -133,7 +141,7 @@ function ClassPage() {
           </div>
         </div>
       )}
-      <div style={{ padding: 10 }}></div>
+      <div style={{ padding: 20 }}>
       <ol>
         {ClassList?.map((cl) => (
           <li
@@ -145,24 +153,27 @@ function ClassPage() {
               padding: 5,
             }}
           >
-            <a className="link" href={`/class/${cl?.id}`}>
-              {cl?.name}
-            </a>
-            <div style={{ display: "flex" }}>
-              <CustomButton
-                variant="submit"
-                title="Update Class"
-                onClick={() => onUpdateClass(cl)}
-              ></CustomButton>
-              <CustomButton
-                variant="delete"
-                title="Delete Class"
-                onClick={() => deleteClasses(cl)}
-              ></CustomButton>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <a className="link" href={`/class/${cl?.id}`}>
+                {cl?.name}
+              </a>
+              <div style={{ display: "flex", gap: 3}}>
+                <CustomButton
+                  variant="submit"
+                  title="Update Class"
+                  onClick={() => onUpdateClass(cl)}
+                ></CustomButton>
+                <CustomButton
+                  variant="delete"
+                  title="Delete Class"
+                  onClick={() => deleteClasses(cl)}
+                ></CustomButton>
+              </div>
             </div>
           </li>
         ))}
       </ol>
+      </div>
       <div />
     </>
   );

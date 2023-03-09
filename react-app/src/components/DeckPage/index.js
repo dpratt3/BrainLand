@@ -61,24 +61,16 @@ function DeckPage() {
 
   return (
     <>
-      <h1 className="title">List of Decks</h1>
-      {/* * To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
-       * To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingRight: 40,
-        }}
-      >
-        {/* <button className="fancyButton">Create Deck</button> */}
-        <CustomButton
-          variant="submit"
-          title="Create Deck"
-          onClick={() => openCreateDeckModal()}
-        ></CustomButton>
+      <div style={{display: "flex", justifyContent: "space-between", padding:20, alignItems: "center"}}>
+        <h1 className="title">List of Decks</h1>
+        
+          <CustomButton
+            variant="submit"
+            title="Create Deck"
+            onClick={() => openCreateDeckModal()}
+          ></CustomButton>
+        {/* </div> */}
       </div>
-
       <p style={{ color: "red" }}>{errorMessage}</p>
 
       {openModal && (
@@ -147,20 +139,23 @@ function DeckPage() {
                 padding: 5,
               }}
             >
-              <a className="link" href={`/deck/${deck?.id}`}>
-                {deck?.name}
-              </a>
-              <div style={{ display: "flex" }}>
-                <CustomButton
-                  variant="submit"
-                  title="Update Deck"
-                  onClick={() => onUpdateDeck(deck)}
-                ></CustomButton>
-                <CustomButton
-                  variant="delete"
-                  title="Delete Deck"
-                  onClick={() => deleteDeck(deck)}
-                ></CustomButton>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <a className="link" href={`/deck/${deck?.id}`}>
+                  {deck?.name}
+                </a>
+
+                <div style={{ display: "flex", gap: 3 }}>
+                  <CustomButton
+                    variant="submit"
+                    title="Update Deck"
+                    onClick={() => onUpdateDeck(deck)}
+                  ></CustomButton>
+                  <CustomButton
+                    variant="delete"
+                    title="Delete Deck"
+                    onClick={() => deleteDeck(deck)}
+                  ></CustomButton>
+                </div>
               </div>
             </li>
           ))}

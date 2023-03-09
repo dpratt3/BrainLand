@@ -76,7 +76,7 @@ function CardPage() {
       >
         <h1 className="title">List of Cards</h1>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
           <CustomButton
             variant="submit"
             title="Create Card"
@@ -165,7 +165,7 @@ function CardPage() {
         </div>
       )}
 
-      <div style={{ padding: 40 }}>
+      <div style={{ padding: 20 }}>
         <ol>
           {CardList?.map((card) => (
             <div
