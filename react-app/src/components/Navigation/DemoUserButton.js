@@ -3,6 +3,7 @@ import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import './Navigation.css';
+import CustomButton from "../Button/Button";
 
 function DemoUserButton() {
   const dispatch = useDispatch();
@@ -22,7 +23,11 @@ function DemoUserButton() {
   
   return (
     <>
-    <button style={{ backgroundColor: "#295970", marginRight: "4px" }} onClick={demoUserLogin}>Demo User</button>
+    <CustomButton
+          variant="submit"
+          title="Demo User"
+          onClick={demoUserLogin}
+        ></CustomButton>
     </>
   );
 }

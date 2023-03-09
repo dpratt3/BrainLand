@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
+import CustomButton from "../Button/Button";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -43,15 +44,6 @@ function SignupFormPage() {
             required
           />
         </label>
-        {/* <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label> */}
         <label>
           Password
           <input
@@ -70,7 +62,10 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <CustomButton
+          variant="submit"
+          title="Sign up"
+        ></CustomButton>
       </form>
     </>
   );

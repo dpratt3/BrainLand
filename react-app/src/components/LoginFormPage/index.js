@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import CustomButton from "../Button/Button";
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -48,7 +49,12 @@ function LoginFormPage() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        {/* <button type="submit">Log In</button> */}
+        <CustomButton
+          variant="submit"
+          title="Login"
+          //onClick={() => openCreateClassModal()}
+        ></CustomButton>
       </form>
     </>
   );
