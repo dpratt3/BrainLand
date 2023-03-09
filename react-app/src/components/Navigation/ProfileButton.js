@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import CustomButton from "../Button/Button";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -51,7 +52,12 @@ function ProfileButton({ user }) {
             <span style={{ margin: "auto 4", marginRight: "4px" }}>{user.email}</span>
             <hr style={{ width: "100%" }} />
             <span>
-              <button style={{ backgroundColor: "#ff5614"}} onClick={handleLogout}>Log Out</button>
+              {/* <button style={{ backgroundColor: "#ff5614"}} onClick={handleLogout}>Log Out</button> */}
+              <CustomButton
+              variant="delete"
+              title="Log Out"
+              onClick={handleLogout}
+            ></CustomButton>
             </span>
           </>
         ) : (
