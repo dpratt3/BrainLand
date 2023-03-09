@@ -31,9 +31,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/category">
+          {/* <Route path="/category">
             <CategoryPage />
-          </Route>
+          </Route> */}
           <Route exact path="/class">
             <ClassPage />
           </Route>
