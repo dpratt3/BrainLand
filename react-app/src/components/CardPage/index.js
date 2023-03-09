@@ -17,7 +17,6 @@ function CardPage() {
 
   const [selectedCard, setSelectedCard] = useState(null);
 
-  console.log(CardList[selectedCard?.id])
   useEffect(() => {
     //  do list of card by deckId
     dispatch(listCardByDeckId(deckId));
