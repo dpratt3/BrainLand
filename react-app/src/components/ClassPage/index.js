@@ -60,9 +60,7 @@ function ClassPage() {
 
   return (
     <>
-      <h1 className="title">Classes</h1>
-      {/* - To Do: Create decks button (On click it will open create deck modal (ambitions) or form (conservative)
-      - To Do: List of decks for selected class ( on right side there will be two buttons, 1. Add Cards, 2. Study deck) */}
+      <h1 className="title">List of Classes</h1>
       <div
         style={{
           display: "flex",

@@ -38,7 +38,6 @@ function CardPage() {
     await dispatch(deleteCardByCardId(card?.id)); //.then(() => history.push('/songs'))
   };
 
-
   const callUpdateCard = () => {
     const card = {
       id: selectedCard?.id,
@@ -162,24 +161,9 @@ function CardPage() {
               onClick={() => setOpenModal(false)}
             ></CustomButton>
 
-            {/* <button
-              className="fancyButton"
-              name="create-card"
-              onClick={() => setOpenModal(false)}
-            >
-              Cancel
-            </button>
-            <button className="fancyButton" onClick={() => callCreateCard()}>
-              Create
-            </button> */}
           </div>
         </div>
       )}
-
-      {/* - To Do: Create decks button (On click it will open create
-      deck modal (ambitions) or form (conservative) - To Do: List of decks for
-      selected class ( on right side there will be two buttons, 1. Add Cards, 2.
-      play deck) */}
 
       <div style={{ padding: 40 }}>
         <ol>
@@ -206,9 +190,6 @@ function CardPage() {
           ))}
         </ol>
       </div>
-      {/* <button className="fancyButton">Show Answer</button>
-      <button className="fancyButton">Next Card</button>
-      <button className="fancyButton">Previous Card</button> */}
     </>
   );
 }
