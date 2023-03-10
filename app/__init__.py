@@ -1,4 +1,5 @@
 import os
+from app.models.db import db, environment, SCHEMA
 from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
