@@ -3,7 +3,6 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { createClass, listClass, editClass } from "../../store/classes";
-import { Modal } from "../CreateCategoryModal";
 import CustomButton from "../Button/Button";
 import { deleteClass } from "../../store/classes";
 
