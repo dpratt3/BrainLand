@@ -75,7 +75,13 @@ def upgrade():
     )
     
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE category SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE class SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE category_class SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE deck SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE cards SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE progress SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
