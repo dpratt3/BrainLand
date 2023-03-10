@@ -69,8 +69,8 @@ class Deck(db.Model):
     name = db.Column(db.String(255), nullable = False)
     class_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('class.id')), nullable=False)
     
-    # cards = db.relationship("Card", backref = db.backref("Deck", lazy = True))
-    # progress = db.relationship("Progress", backref = db.backref("Deck", lazy = True))  
+    cards = db.relationship("Card", backref = db.backref("Deck", lazy = True))
+    progress = db.relationship("Progress", backref = db.backref("Deck", lazy = True))  
 
     
     def to_dict(self):
