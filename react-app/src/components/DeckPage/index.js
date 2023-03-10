@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { listDeckByClassId, createDeck, updateDeck } from "../../store/decks";
 import CustomButton from "../Button/Button";
-import { Modal } from "../CreateCategoryModal";
 import { deleteDeckByDeckId } from "../../store/decks";
 
 function DeckPage() {
