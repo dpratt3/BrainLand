@@ -74,24 +74,6 @@ function CategoryPage() {
             }}
             onChange={(e) => setCategoryName(e.target.value)}
           />
-          {/* <button
-            name="create-category"
-            style={{
-              width: 240,
-              marginTop: 40,
-              height: 34,
-              backgroundColor: "#36013F",
-              color: "white",
-              border: "none",
-              fontWeight: 800,
-              cursor: "pointer",
-            }}
-            onClick={() => callCreateCategory()}
-            // dispatch create category action with payload and openModal set to false
-            // onClick={() => }}
-          >
-            Create
-          </button> */}
 
         <div style={{display: "flex", gap: "20", marginTop: "40"}}>
           <CustomButton
