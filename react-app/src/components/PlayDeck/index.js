@@ -68,9 +68,6 @@ function PlayDeck() {
         {CardList?.length > 0 && currentQuestionIndex === CardList?.length && (
           <div style={{ color: "white" }}>
             <h1> You have successfully completed this deck!</h1>
-            {/* <button className="fancyButton" onClick={onRetry}>
-              Retry
-            </button> */}
               <CustomButton
                 variant="submit"
                 title="Retry"
@@ -122,34 +119,6 @@ function PlayDeck() {
                 onClick={() => changeQuestion(1)}
                 disabled={currentQuestionIndex === CardList?.length}
               ></CustomButton>
-
-              {/* <CustomButton
-                variant="delete"
-                title="Delete Card"
-                onClick={() => deleteCard(CardList[currentQuestionIndex])}
-              ></CustomButton> */}
-
-              {/* <button
-                className="fancyButton"
-                onClick={() => changeQuestion(1)}
-                disabled={currentQuestionIndex === CardList?.length}
-              >
-                Next Card
-              </button>
-              <button
-                className="fancyButton"
-                onClick={() => changeQuestion(-1)}
-                disabled={currentQuestionIndex === 0}
-              >
-                Previous Card
-              </button> */}
-              {/* <button
-                className="fancyDeleteButton"
-                onClick={() => deleteCard(CardList[currentQuestionIndex])}
-                // disabled={currentQuestionIndex === 0}
-              >
-                Delete Card
-              </button> */}
             </div>
           </div>
         )}
