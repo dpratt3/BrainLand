@@ -39,22 +39,6 @@ function CategoryPage() {
           paddingRight: 40,
         }}
       >
-        {/* <button
-          name="create-category"
-          style={{
-            width: 240,
-            height: 34,
-            backgroundColor: "#36013F",
-            color: "white",
-            border: "none",
-            fontWeight: 800,
-            cursor: "pointer",
-          }}
-          onClick={() => setOpenModal(true)}
-          
-        >
-          Create Category
-        </button> */}
         <CustomButton
           variant="submit"
           title="Create Category"
