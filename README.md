@@ -1,6 +1,6 @@
 
 # BrainLand
-This repo is  a clone of some of the functionality and styling of BrainScape
+This repo is inspired by BrainScape and mirrors some of its functionality.
 
 ![image](/planning-docs/BrainLand.png)
 
