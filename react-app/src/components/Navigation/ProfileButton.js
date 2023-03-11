@@ -49,10 +49,9 @@ function ProfileButton({ user }) {
           <>
             {/* <li>{user.username}</li> */}
             
-            <span style={{ margin: "auto 4", marginRight: "4px" }}>{user.email}</span>
+            <span style={{ margin: "auto 4", marginRight: "4px", color: "white"}}>{user.email}</span>
             <hr style={{ width: "100%" }} />
             <span>
-              {/* <button style={{ backgroundColor: "#ff5614"}} onClick={handleLogout}>Log Out</button> */}
               <CustomButton
               variant="delete"
               title="Log Out"
