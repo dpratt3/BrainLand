@@ -68,9 +68,14 @@ function PlayDeck() {
         {CardList?.length > 0 && currentQuestionIndex === CardList?.length && (
           <div style={{ color: "white" }}>
             <h1> You have successfully completed this deck!</h1>
-            <button className="fancyButton" onClick={onRetry}>
+            {/* <button className="fancyButton" onClick={onRetry}>
               Retry
-            </button>
+            </button> */}
+              <CustomButton
+                variant="submit"
+                title="Retry"
+                onClick={onRetry}
+              ></CustomButton>
           </div>
         )}
 
