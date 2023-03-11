@@ -98,6 +98,7 @@ function PlayDeck() {
                 justifyContent: "center",
                 alignItems: "center",
                 height: 800,
+                position: "absolute"
               }}
             >
               <CustomButton

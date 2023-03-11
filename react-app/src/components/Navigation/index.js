@@ -46,8 +46,6 @@ function Navigation({ isLoaded }){
     );
   }
 
-
-
 	return (
 		<div style={{backgroundColor: "#36013F",}}>
 			{isLoaded && sessionLinks}
