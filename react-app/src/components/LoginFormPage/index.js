@@ -32,7 +32,7 @@ function LoginFormPage() {
           ))}
         </ul>
         <label>
-          Email
+          Email:
           <input
             type="text"
             value={email}
@@ -41,20 +41,18 @@ function LoginFormPage() {
           />
         </label>
         <label>
-          Password
-          <input
+          Password:
+          <input style={{marginBottom: "30px"}}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {/* <button type="submit">Log In</button> */}
-        <CustomButton
-          variant="submit"
-          title="Login"
-          //onClick={() => openCreateClassModal()}
-        ></CustomButton>
+          <CustomButton style={{marginBottom: "30px"}}
+            variant="submit"
+            title="Login"
+          ></CustomButton>
       </form>
     </>
   );

@@ -36,7 +36,7 @@ function SignupFormPage() {
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
-          Email
+          Email:
           <input
             type="text"
             value={email}
@@ -45,7 +45,7 @@ function SignupFormPage() {
           />
         </label>
         <label>
-          Password
+          Password:
           <input
             type="password"
             value={password}
@@ -54,8 +54,8 @@ function SignupFormPage() {
           />
         </label>
         <label>
-          Confirm Password
-          <input
+          Confirm Password:
+          <input style={{marginBottom: "30px"}}
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}

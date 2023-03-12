@@ -68,13 +68,7 @@ function ClassPage() {
         }}
       >
         <h1 className="title">List of Classes</h1>
-        {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingRight: 40,
-        }}
-      > */}
+
         <CustomButton
           variant="submit"
           title="Create Class"

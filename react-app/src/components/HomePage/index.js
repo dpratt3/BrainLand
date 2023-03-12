@@ -16,7 +16,7 @@ function HomePage() {
               style={{ width: 800, height: 450, borderRadius: 4, opacity: 0.65 }} alt="crowd of listeners" />
       </div>
           <div style={{ textAlign: "center", backgroundColor: "#36013F", marginTop: 8, color: "#fff" }}>
-              BrainScape Clone | Author : David Pratt
+              Inspired by BrainScape | Author : David Pratt
           </div>
       </div>);
 
