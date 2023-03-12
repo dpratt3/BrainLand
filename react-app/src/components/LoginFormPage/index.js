@@ -33,7 +33,7 @@ function LoginFormPage() {
         </ul>
         <label>
           Email:
-          <input
+          <input style={{height: "28px"}}
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -42,7 +42,7 @@ function LoginFormPage() {
         </label>
         <label>
           Password:
-          <input style={{marginBottom: "30px"}}
+          <input style={{marginBottom: "30px", height: "28px"}}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
