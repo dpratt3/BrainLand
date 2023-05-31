@@ -55,6 +55,7 @@ function CardPage() {
   };
 
   const onUpdateCard = (card) => {
+    console.log('hello world! <----------------------------------------------------------------------')
     setSelectedCard(card);
     setCardQuestion(card?.card_question);
     setCardAnswer(card?.card_answer);
